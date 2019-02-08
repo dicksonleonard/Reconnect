@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Contacts
 
 class ContactTableViewController: UITableViewController {
 
@@ -14,17 +15,44 @@ class ContactTableViewController: UITableViewController {
     var filteredContact: Array<Person> = []
     let searchController = UISearchController(searchResultsController: nil)
     
+    lazy var contacts: [CNContact] = {
+        let contactStore = CNContactStore()
+        let keysToFetch: [Any] = [
+            CNContactFormatter.descriptorForRequiredKeys(for: .fullName),
+            CNContactEmailAddressesKey,
+            CNContactPhoneNumbersKey,
+            CNContactImageDataAvailableKey,
+            CNContactThumbnailImageDataKey]
+        
+        // Get all the containers
+        var allContainers: [CNContainer] = []
+        do {
+            allContainers = try contactStore.containers(matching: nil)
+        } catch {
+            print("Error fetching containers")
+        }
+        
+        var results: [CNContact] = []
+        
+        // Iterate all containers and append their contacts to our results array
+        for container in allContainers {
+            let fetchPredicate = CNContact.predicateForContactsInContainer(withIdentifier: container.identifier)
+            
+            do {
+                let containerResults = try contactStore.unifiedContacts(matching: fetchPredicate, keysToFetch: keysToFetch as! [CNKeyDescriptor])
+                results.append(contentsOf: containerResults)
+            } catch {
+                print("Error fetching results for container")
+            }
+        }
+        
+        return results
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Contact"
-        
-//        self.navigationController?.navigationBar.prefersLargeTitles = true
-        
-        let personOne = Person(name: "Dickson")
-        contactsArray.append(personOne)
-        
-        let personTwo = Person(name: "Ari", jobTitle: "Designer", image: nil, periode: .sixMonth)
-        contactsArray.append(personTwo)
+        self.navigationController?.navigationBar.prefersLargeTitles = true
 
         // Setup the Search Controller
         searchController.searchResultsUpdater = self
@@ -32,6 +60,11 @@ class ContactTableViewController: UITableViewController {
         searchController.searchBar.placeholder = "Search Contact"
         navigationItem.searchController = searchController
         definesPresentationContext = true
+        
+        // Transfer device contacts to app contacts
+        for contact in contacts {
+            contactsArray.append(Person(name: "\(contact.givenName) \(contact.familyName)"))
+        }
     }
 
     // MARK: - Table view data source
@@ -54,7 +87,7 @@ class ContactTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Buat cell
-        let cell = tableView.dequeueReusableCell(withIdentifier: "contactCell", for: indexPath)  
+        let cell = tableView.dequeueReusableCell(withIdentifier: "contactCell", for: indexPath) as! ContactCell
 
         let personAtRow: Person
         if isFiltering() {
@@ -64,10 +97,8 @@ class ContactTableViewController: UITableViewController {
         }
         
         
-        cell.textLabel?.text = personAtRow.name
+        cell.nameLabel.text = personAtRow.name
         
-//        cell.imageView?.image = personAtRow.image
-//        cell.detailTextLabel?.text = personAtRow.jobTitle
         
         
         
