@@ -27,7 +27,7 @@
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Sb8-l0-5BF">
                                             <rect key="frame" x="16" y="10" width="50" height="50"/>
-                                            <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="0fb-nd-mO5"/>
                                                 <constraint firstAttribute="width" constant="50" id="Rmx-Ri-Itp"/>
@@ -44,14 +44,24 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wge-tG-agQ">
+                                            <rect key="frame" x="16" y="10" width="50" height="50"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="aA1-SK-Jrs" firstAttribute="leading" secondItem="Sb8-l0-5BF" secondAttribute="trailing" constant="8" id="0G0-xz-APN"/>
                                         <constraint firstItem="Sb8-l0-5BF" firstAttribute="leading" secondItem="FaV-Z4-94b" secondAttribute="leading" constant="16" id="6kC-w0-iUT"/>
                                         <constraint firstAttribute="bottom" secondItem="Sb8-l0-5BF" secondAttribute="bottom" constant="10" id="HNH-Ls-Je6"/>
+                                        <constraint firstItem="Wge-tG-agQ" firstAttribute="bottom" secondItem="Sb8-l0-5BF" secondAttribute="bottom" id="MJ6-aq-jVh"/>
+                                        <constraint firstItem="Wge-tG-agQ" firstAttribute="leading" secondItem="Sb8-l0-5BF" secondAttribute="leading" id="PkP-gH-0Vy"/>
                                         <constraint firstItem="Sb8-l0-5BF" firstAttribute="centerY" secondItem="FaV-Z4-94b" secondAttribute="centerY" id="QJi-3H-ztb"/>
+                                        <constraint firstItem="Wge-tG-agQ" firstAttribute="top" secondItem="Sb8-l0-5BF" secondAttribute="top" id="Qwn-iK-rhH"/>
                                         <constraint firstItem="aA1-SK-Jrs" firstAttribute="centerY" secondItem="Sb8-l0-5BF" secondAttribute="centerY" id="UvQ-sZ-DYe"/>
                                         <constraint firstItem="Sb8-l0-5BF" firstAttribute="top" secondItem="FaV-Z4-94b" secondAttribute="top" constant="10" id="oZt-7i-0pd"/>
+                                        <constraint firstItem="Wge-tG-agQ" firstAttribute="trailing" secondItem="Sb8-l0-5BF" secondAttribute="trailing" id="vG9-5o-3Q2"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
