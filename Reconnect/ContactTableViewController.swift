@@ -100,7 +100,6 @@ class ContactTableViewController: UITableViewController {
         cell.nameLabel.text = personAtRow.name
         
         // Get initial
-        //asdadasdads
         
         
         
