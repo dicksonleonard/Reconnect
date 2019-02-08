@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		7162FE7B220C1CE9009B1093 /* Contacts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7162FE7A220C1CE9009B1093 /* Contacts.storyboard */; };
 		7162FE7E220C1DDC009B1093 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7162FE7C220C1DDC009B1093 /* Settings.storyboard */; };
+		7162FE81220D2E9B009B1093 /* ContactTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7162FE7F220D2E9B009B1093 /* ContactTableViewController.swift */; };
+		7162FE82220D2E9B009B1093 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7162FE80220D2E9B009B1093 /* Person.swift */; };
 		71BFDA8F220C188300E771FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BFDA8E220C188300E771FF /* AppDelegate.swift */; };
 		71BFDA94220C188300E771FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71BFDA92220C188300E771FF /* Main.storyboard */; };
 		71BFDA96220C188500E771FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71BFDA95220C188500E771FF /* Assets.xcassets */; };
@@ -38,6 +40,8 @@
 /* Begin PBXFileReference section */
 		7162FE7A220C1CE9009B1093 /* Contacts.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Contacts.storyboard; sourceTree = "<group>"; };
 		7162FE7D220C1DDC009B1093 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
+		7162FE7F220D2E9B009B1093 /* ContactTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTableViewController.swift; sourceTree = "<group>"; };
+		7162FE80220D2E9B009B1093 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		71BFDA8B220C188300E771FF /* Reconnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reconnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71BFDA8E220C188300E771FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		71BFDA93220C188300E771FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -101,6 +105,8 @@
 		71BFDA8D220C188300E771FF /* Reconnect */ = {
 			isa = PBXGroup;
 			children = (
+				7162FE7F220D2E9B009B1093 /* ContactTableViewController.swift */,
+				7162FE80220D2E9B009B1093 /* Person.swift */,
 				71BFDA8E220C188300E771FF /* AppDelegate.swift */,
 				71BFDA92220C188300E771FF /* Main.storyboard */,
 				71BFDA95220C188500E771FF /* Assets.xcassets */,
@@ -265,6 +271,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7162FE82220D2E9B009B1093 /* Person.swift in Sources */,
+				7162FE81220D2E9B009B1093 /* ContactTableViewController.swift in Sources */,
 				71BFDA8F220C188300E771FF /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
