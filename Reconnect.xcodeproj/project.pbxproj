@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C0440CC22112F4D009F75CA /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 5C0440CB22112F4D009F75CA /* .swiftlint.yml */; };
+		5C0440CE221157AB009F75CA /* HomeHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0440CD221157AB009F75CA /* HomeHeaderViewController.swift */; };
+		5C45CA65220D65E800375DA5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45CA64220D65E800375DA5 /* HomeViewController.swift */; };
+		5C45CA69220D721A00375DA5 /* DailyTipsCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45CA68220D721A00375DA5 /* DailyTipsCVCell.swift */; };
+		5C45CA6B220D724E00375DA5 /* DailyQuoteCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45CA6A220D724E00375DA5 /* DailyQuoteCVCell.swift */; };
 		7162FE7B220C1CE9009B1093 /* Contacts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7162FE7A220C1CE9009B1093 /* Contacts.storyboard */; };
 		7162FE7E220C1DDC009B1093 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7162FE7C220C1DDC009B1093 /* Settings.storyboard */; };
 		7162FE81220D2E9B009B1093 /* ContactTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7162FE7F220D2E9B009B1093 /* ContactTableViewController.swift */; };
@@ -40,6 +45,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5C0440CB22112F4D009F75CA /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
+		5C0440CD221157AB009F75CA /* HomeHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeHeaderViewController.swift; path = Reconnect/HomeHeaderViewController.swift; sourceTree = "<group>"; };
+		5C45CA64220D65E800375DA5 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		5C45CA68220D721A00375DA5 /* DailyTipsCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTipsCVCell.swift; sourceTree = "<group>"; };
+		5C45CA6A220D724E00375DA5 /* DailyQuoteCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyQuoteCVCell.swift; sourceTree = "<group>"; };
 		7162FE7A220C1CE9009B1093 /* Contacts.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Contacts.storyboard; sourceTree = "<group>"; };
 		7162FE7D220C1DDC009B1093 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
 		7162FE7F220D2E9B009B1093 /* ContactTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTableViewController.swift; sourceTree = "<group>"; };
@@ -89,7 +99,9 @@
 		71BFDA82220C188300E771FF = {
 			isa = PBXGroup;
 			children = (
-				7162FEC5221135FD009B1093 /* .swiftlint.yml */,
+
+				5C0440CD221157AB009F75CA /* HomeHeaderViewController.swift */,
+				5C0440CB22112F4D009F75CA /* .swiftlint.yml */,
 				71BFDA8D220C188300E771FF /* Reconnect */,
 				71BFDAA2220C188500E771FF /* ReconnectTests */,
 				71BFDAAD220C188500E771FF /* ReconnectUITests */,
@@ -120,7 +132,13 @@
 				71BFDABC220C1C8500E771FF /* Home.storyboard */,
 				7162FE7A220C1CE9009B1093 /* Contacts.storyboard */,
 				7162FE7C220C1DDC009B1093 /* Settings.storyboard */,
+<<<<<<< HEAD
 				7162FE83220D5BBA009B1093 /* ContactCell.swift */,
+=======
+				5C45CA64220D65E800375DA5 /* HomeViewController.swift */,
+				5C45CA68220D721A00375DA5 /* DailyTipsCVCell.swift */,
+				5C45CA6A220D724E00375DA5 /* DailyQuoteCVCell.swift */,
+>>>>>>> Swift lint stuffs 2
 			);
 			path = Reconnect;
 			sourceTree = "<group>";
@@ -153,7 +171,11 @@
 				71BFDA87220C188300E771FF /* Sources */,
 				71BFDA88220C188300E771FF /* Frameworks */,
 				71BFDA89220C188300E771FF /* Resources */,
+<<<<<<< HEAD
 				7162FEC222112C6D009B1093 /* Run Swift Lint */,
+=======
+				5C0440CA22112B79009F75CA /* Run Swift Lint */,
+>>>>>>> Swift lint stuffs 2
 			);
 			buildRules = (
 			);
@@ -251,7 +273,11 @@
 				71BFDA99220C188500E771FF /* LaunchScreen.storyboard in Resources */,
 				71BFDA96220C188500E771FF /* Assets.xcassets in Resources */,
 				7162FE7B220C1CE9009B1093 /* Contacts.storyboard in Resources */,
+<<<<<<< HEAD
 				7162FEC6221135FD009B1093 /* .swiftlint.yml in Resources */,
+=======
+				5C0440CC22112F4D009F75CA /* .swiftlint.yml in Resources */,
+>>>>>>> Swift lint stuffs 2
 				7162FE7E220C1DDC009B1093 /* Settings.storyboard in Resources */,
 				71BFDA94220C188300E771FF /* Main.storyboard in Resources */,
 				71BFDABE220C1C8500E771FF /* Home.storyboard in Resources */,
@@ -275,7 +301,11 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+<<<<<<< HEAD
 		7162FEC222112C6D009B1093 /* Run Swift Lint */ = {
+=======
+		5C0440CA22112B79009F75CA /* Run Swift Lint */ = {
+>>>>>>> Swift lint stuffs 2
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -304,6 +334,10 @@
 				7162FE82220D2E9B009B1093 /* Person.swift in Sources */,
 				7162FE81220D2E9B009B1093 /* ContactTableViewController.swift in Sources */,
 				71BFDA8F220C188300E771FF /* AppDelegate.swift in Sources */,
+				5C45CA65220D65E800375DA5 /* HomeViewController.swift in Sources */,
+				5C0440CE221157AB009F75CA /* HomeHeaderViewController.swift in Sources */,
+				5C45CA69220D721A00375DA5 /* DailyTipsCVCell.swift in Sources */,
+				5C45CA6B220D724E00375DA5 /* DailyQuoteCVCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
