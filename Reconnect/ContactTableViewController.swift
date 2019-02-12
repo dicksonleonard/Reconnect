@@ -71,7 +71,7 @@ class ContactTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 6
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -80,9 +80,6 @@ class ContactTableViewController: UITableViewController {
         } else {
             return contactsArray.count
         }
-    }
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Not Introduced"
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -97,14 +94,61 @@ class ContactTableViewController: UITableViewController {
         }
         
         
+        
+        
         cell.nameLabel.text = personAtRow.name
         
         // Get initial
         
-        
-        
-        
         return cell
+    }
+    
+    // MARK: - Header thingy
+    
+//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        switch section {
+//        case 0:
+//            return "Tomorrow"
+//        case 1:
+//            return "1 month"
+//        case 2:
+//            return "1 year"
+//        case 3:
+//            return "2 years"
+//        case 4:
+//            return "Skipped"
+//        default:
+//            return "Not introduced"
+//        }
+//    }
+//
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerButton = UIButton(type: .system)
+        headerButton.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        switch section {
+        case 0:
+            headerButton.setTitle("Tomorrow", for: .normal)
+            return headerButton
+        case 1:
+            headerButton.setTitle("1 month", for: .normal)
+            return headerButton
+        case 2:
+            headerButton.setTitle("1 year", for: .normal)
+            return headerButton
+        case 3:
+            headerButton.setTitle("2 years", for: .normal)
+            return headerButton
+        case 4:
+            headerButton.setTitle("Skipped", for: .normal)
+            return headerButton
+        default:
+            headerButton.setTitle("Not Introduced", for: .normal)
+            return headerButton
+    }
     }
     
     // MARK: - Private instance methods
