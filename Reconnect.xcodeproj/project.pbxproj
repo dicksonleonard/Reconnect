@@ -132,13 +132,10 @@
 				71BFDABC220C1C8500E771FF /* Home.storyboard */,
 				7162FE7A220C1CE9009B1093 /* Contacts.storyboard */,
 				7162FE7C220C1DDC009B1093 /* Settings.storyboard */,
-<<<<<<< HEAD
 				7162FE83220D5BBA009B1093 /* ContactCell.swift */,
-=======
 				5C45CA64220D65E800375DA5 /* HomeViewController.swift */,
 				5C45CA68220D721A00375DA5 /* DailyTipsCVCell.swift */,
 				5C45CA6A220D724E00375DA5 /* DailyQuoteCVCell.swift */,
->>>>>>> Swift lint stuffs 2
 			);
 			path = Reconnect;
 			sourceTree = "<group>";
@@ -171,11 +168,7 @@
 				71BFDA87220C188300E771FF /* Sources */,
 				71BFDA88220C188300E771FF /* Frameworks */,
 				71BFDA89220C188300E771FF /* Resources */,
-<<<<<<< HEAD
-				7162FEC222112C6D009B1093 /* Run Swift Lint */,
-=======
 				5C0440CA22112B79009F75CA /* Run Swift Lint */,
->>>>>>> Swift lint stuffs 2
 			);
 			buildRules = (
 			);
@@ -273,11 +266,7 @@
 				71BFDA99220C188500E771FF /* LaunchScreen.storyboard in Resources */,
 				71BFDA96220C188500E771FF /* Assets.xcassets in Resources */,
 				7162FE7B220C1CE9009B1093 /* Contacts.storyboard in Resources */,
-<<<<<<< HEAD
-				7162FEC6221135FD009B1093 /* .swiftlint.yml in Resources */,
-=======
 				5C0440CC22112F4D009F75CA /* .swiftlint.yml in Resources */,
->>>>>>> Swift lint stuffs 2
 				7162FE7E220C1DDC009B1093 /* Settings.storyboard in Resources */,
 				71BFDA94220C188300E771FF /* Main.storyboard in Resources */,
 				71BFDABE220C1C8500E771FF /* Home.storyboard in Resources */,
@@ -301,11 +290,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-<<<<<<< HEAD
-		7162FEC222112C6D009B1093 /* Run Swift Lint */ = {
-=======
 		5C0440CA22112B79009F75CA /* Run Swift Lint */ = {
->>>>>>> Swift lint stuffs 2
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (

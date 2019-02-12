@@ -4,3 +4,4 @@ disabled_rules:
 - function_body_length
 excluded:
 - Carthage
+- CocoaPods
