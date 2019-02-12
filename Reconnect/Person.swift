@@ -22,7 +22,7 @@ struct Person {
     var jobTitle: String?
     var image: UIImage?
     var periode: Periode
-    
+
     init(name: String, jobTitle: String? = nil, image: UIImage? = nil, periode: Periode = .notIntroduced) {
         self.name = name
         self.jobTitle = jobTitle

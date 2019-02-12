@@ -11,10 +11,10 @@ import Contacts
 
 class ContactTableViewController: UITableViewController {
 
-    var contactsArray: Array<Person> = []
-    var filteredContact: Array<Person> = []
+    var contactsArray: [Person] = []
+    var filteredContact: [Person] = []
     let searchController = UISearchController(searchResultsController: nil)
-    
+
     lazy var contacts: [CNContact] = {
         let contactStore = CNContactStore()
         let keysToFetch: [Any] = [
@@ -23,7 +23,7 @@ class ContactTableViewController: UITableViewController {
             CNContactPhoneNumbersKey,
             CNContactImageDataAvailableKey,
             CNContactThumbnailImageDataKey]
-        
+
         // Get all the containers
         var allContainers: [CNContainer] = []
         do {
@@ -31,24 +31,27 @@ class ContactTableViewController: UITableViewController {
         } catch {
             print("Error fetching containers")
         }
-        
+
         var results: [CNContact] = []
-        
+
         // Iterate all containers and append their contacts to our results array
         for container in allContainers {
             let fetchPredicate = CNContact.predicateForContactsInContainer(withIdentifier: container.identifier)
-            
+
             do {
-                let containerResults = try contactStore.unifiedContacts(matching: fetchPredicate, keysToFetch: keysToFetch as! [CNKeyDescriptor])
-                results.append(contentsOf: containerResults)
+                if let keys = keysToFetch as? [CNKeyDescriptor] {
+                    let containerResults = try contactStore.unifiedContacts(matching: fetchPredicate, keysToFetch: keys)
+                    results.append(contentsOf: containerResults)
+                }
+                
             } catch {
                 print("Error fetching results for container")
             }
         }
-        
+
         return results
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Contact"
@@ -60,7 +63,7 @@ class ContactTableViewController: UITableViewController {
         searchController.searchBar.placeholder = "Search Contact"
         navigationItem.searchController = searchController
         definesPresentationContext = true
-        
+
         // Transfer device contacts to app contacts
         for contact in contacts {
             contactsArray.append(Person(name: "\(contact.givenName) \(contact.familyName)"))
@@ -81,10 +84,10 @@ class ContactTableViewController: UITableViewController {
             return contactsArray.count
         }
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Buat cell
-        let cell = tableView.dequeueReusableCell(withIdentifier: "contactCell", for: indexPath) as! ContactCell
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "contactCell", for: indexPath) as? ContactCell {
 
         let personAtRow: Person
         if isFiltering() {
@@ -92,11 +95,16 @@ class ContactTableViewController: UITableViewController {
         } else {
             personAtRow = contactsArray[indexPath.row]
         }
+        
         cell.nameLabel.text = personAtRow.name
         
         // Get initial
-        
         return cell
+        } else {
+            // Cell not found, return regular UITableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "reuseableIdentifier", for: indexPath)
+            return cell
+        }
     }
     
     // MARK: - Header thingy
@@ -145,25 +153,24 @@ class ContactTableViewController: UITableViewController {
     
     
     // MARK: - Private instance methods
-    
+
     func searchBarIsEmpty() -> Bool {
         // Returns true if the text is empty or nil
         return searchController.searchBar.text?.isEmpty ?? true
     }
-    
+
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
         filteredContact = contactsArray.filter({(person: Person) -> Bool in
             return person.name.lowercased().contains(searchText.lowercased())
         })
-        
+
         tableView.reloadData()
     }
- 
+
     func isFiltering() -> Bool {
         return searchController.isActive && !searchBarIsEmpty()
     }
-    
-    
+
     /*
     // MARK: - Navigation
 
@@ -175,8 +182,6 @@ class ContactTableViewController: UITableViewController {
     */
 
 }
-
-
 
 extension ContactTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
