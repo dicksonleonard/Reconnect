@@ -12,7 +12,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBOutlet weak var homeTableView: UITableView!
     @IBOutlet weak var dailyContentTableHeader: UIView!
-    private let needToAddTagContacts : [Person] = []
+    private let needToAddTagContacts: [Person] = []
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +25,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         return 2
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {  return UITableViewCell()    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "contactCell", for: indexPath)
+        cell.textLabel?.text = "It is contact cell"
+        return cell
+    }
     /*
     // MARK: - Navigation
 
