@@ -92,10 +92,6 @@ class ContactTableViewController: UITableViewController {
         } else {
             personAtRow = contactsArray[indexPath.row]
         }
-        
-        
-        
-        
         cell.nameLabel.text = personAtRow.name
         
         // Get initial
@@ -105,23 +101,6 @@ class ContactTableViewController: UITableViewController {
     
     // MARK: - Header thingy
     
-//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        switch section {
-//        case 0:
-//            return "Tomorrow"
-//        case 1:
-//            return "1 month"
-//        case 2:
-//            return "1 year"
-//        case 3:
-//            return "2 years"
-//        case 4:
-//            return "Skipped"
-//        default:
-//            return "Not introduced"
-//        }
-//    }
-//
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
     }
@@ -129,6 +108,7 @@ class ContactTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerButton = UIButton(type: .system)
         headerButton.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        headerButton.addTarget(self, action: #selector(handleExpandClose), for: .touchUpInside)
         switch section {
         case 0:
             headerButton.setTitle("Tomorrow", for: .normal)
@@ -148,8 +128,21 @@ class ContactTableViewController: UITableViewController {
         default:
             headerButton.setTitle("Not Introduced", for: .normal)
             return headerButton
+        }
     }
+    
+    @objc func handleExpandClose() {
+        let section = 0
+        var indexPaths = [IndexPath]()
+        for row in contacts.indices {
+            let indexPath = IndexPath(row: row, section: section)
+            print(0,row)
+            indexPaths.append(indexPath)
+        }
+        contacts.removeAll()
+        tableView.deleteRows(at: indexPaths, with: .fade)
     }
+    
     
     // MARK: - Private instance methods
     
