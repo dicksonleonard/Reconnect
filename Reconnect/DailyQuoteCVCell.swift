@@ -10,4 +10,5 @@ import UIKit
 
 class DailyQuoteCVCell: UICollectionViewCell {
 
+    @IBOutlet weak var quoteLabel: UILabel!
 }

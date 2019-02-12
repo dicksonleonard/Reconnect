@@ -8,4 +8,7 @@
 
 import UIKit
 
-class DailyTipsCVCell: UICollectionViewCell {}
+class DailyTipsCVCell: UICollectionViewCell {
+    
+    @IBOutlet weak var tipsLabel: UILabel!
+}
