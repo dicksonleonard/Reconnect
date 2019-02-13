@@ -17,7 +17,9 @@
 		7162FE81220D2E9B009B1093 /* ContactTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7162FE7F220D2E9B009B1093 /* ContactTableViewController.swift */; };
 		7162FE82220D2E9B009B1093 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7162FE80220D2E9B009B1093 /* Person.swift */; };
 		7162FE84220D5BBA009B1093 /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7162FE83220D5BBA009B1093 /* ContactCell.swift */; };
-		7162FEC6221135FD009B1093 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7162FEC5221135FD009B1093 /* .swiftlint.yml */; };
+		7162FF062213C5AE009B1093 /* Reconnect.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7162FF042213C5AE009B1093 /* Reconnect.xcdatamodeld */; };
+		7162FF082213D355009B1093 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7162FF072213D355009B1093 /* OnboardingViewController.swift */; };
+		719A0AF22213FFE00063FDA4 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 719A0AF12213FFE00063FDA4 /* Onboarding.storyboard */; };
 		71BFDA8F220C188300E771FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BFDA8E220C188300E771FF /* AppDelegate.swift */; };
 		71BFDA94220C188300E771FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71BFDA92220C188300E771FF /* Main.storyboard */; };
 		71BFDA96220C188500E771FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71BFDA95220C188500E771FF /* Assets.xcassets */; };
@@ -55,7 +57,9 @@
 		7162FE7F220D2E9B009B1093 /* ContactTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTableViewController.swift; sourceTree = "<group>"; };
 		7162FE80220D2E9B009B1093 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		7162FE83220D5BBA009B1093 /* ContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
-		7162FEC5221135FD009B1093 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
+		7162FF052213C5AE009B1093 /* Reconnect.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Reconnect.xcdatamodel; sourceTree = "<group>"; };
+		7162FF072213D355009B1093 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		719A0AF12213FFE00063FDA4 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		71BFDA8B220C188300E771FF /* Reconnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reconnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71BFDA8E220C188300E771FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		71BFDA93220C188300E771FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -99,7 +103,6 @@
 		71BFDA82220C188300E771FF = {
 			isa = PBXGroup;
 			children = (
-
 				5C0440CD221157AB009F75CA /* HomeHeaderViewController.swift */,
 				5C0440CB22112F4D009F75CA /* .swiftlint.yml */,
 				71BFDA8D220C188300E771FF /* Reconnect */,
@@ -136,6 +139,9 @@
 				5C45CA64220D65E800375DA5 /* HomeViewController.swift */,
 				5C45CA68220D721A00375DA5 /* DailyTipsCVCell.swift */,
 				5C45CA6A220D724E00375DA5 /* DailyQuoteCVCell.swift */,
+				7162FF042213C5AE009B1093 /* Reconnect.xcdatamodeld */,
+				7162FF072213D355009B1093 /* OnboardingViewController.swift */,
+				719A0AF12213FFE00063FDA4 /* Onboarding.storyboard */,
 			);
 			path = Reconnect;
 			sourceTree = "<group>";
@@ -270,6 +276,7 @@
 				7162FE7E220C1DDC009B1093 /* Settings.storyboard in Resources */,
 				71BFDA94220C188300E771FF /* Main.storyboard in Resources */,
 				71BFDABE220C1C8500E771FF /* Home.storyboard in Resources */,
+				719A0AF22213FFE00063FDA4 /* Onboarding.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,8 +326,10 @@
 				7162FE82220D2E9B009B1093 /* Person.swift in Sources */,
 				7162FE81220D2E9B009B1093 /* ContactTableViewController.swift in Sources */,
 				71BFDA8F220C188300E771FF /* AppDelegate.swift in Sources */,
+				7162FF062213C5AE009B1093 /* Reconnect.xcdatamodeld in Sources */,
 				5C45CA65220D65E800375DA5 /* HomeViewController.swift in Sources */,
 				5C0440CE221157AB009F75CA /* HomeHeaderViewController.swift in Sources */,
+				7162FF082213D355009B1093 /* OnboardingViewController.swift in Sources */,
 				5C45CA69220D721A00375DA5 /* DailyTipsCVCell.swift in Sources */,
 				5C45CA6B220D724E00375DA5 /* DailyQuoteCVCell.swift in Sources */,
 			);
@@ -514,6 +523,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5PUSGPU2VB;
 				INFOPLIST_FILE = Reconnect/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -531,6 +541,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5PUSGPU2VB;
 				INFOPLIST_FILE = Reconnect/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -661,6 +672,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7162FF042213C5AE009B1093 /* Reconnect.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7162FF052213C5AE009B1093 /* Reconnect.xcdatamodel */,
+			);
+			currentVersion = 7162FF052213C5AE009B1093 /* Reconnect.xcdatamodel */;
+			path = Reconnect.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 71BFDA83220C188300E771FF /* Project object */;
 }
