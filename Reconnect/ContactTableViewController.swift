@@ -144,12 +144,10 @@ class ContactTableViewController: UITableViewController {
     }
     
     @objc func handleExpandClose(headerButton: UIButton) {
-        print(isExpanded)
         let section = headerButton.tag
         isExpanded[section] = !isExpanded[section]
-        tableView.reloadSections(IndexSet(section...section),with: .automatic)
-
-        a
+        tableView.reloadSections(IndexSet(section...section),with:.automatic)
+        print(isExpanded)
 //        var indexPaths = [IndexPath]()
 //        for row in contacts.indices {
 //            let indexPath = IndexPath(row: row, section: section)
@@ -159,8 +157,6 @@ class ContactTableViewController: UITableViewController {
 //        contacts.removeAll()
 //        tableView.deleteRows(at: indexPaths, with: .fade)
     }
-    
-    
     // MARK: - Private instance methods
 
     func searchBarIsEmpty() -> Bool {
