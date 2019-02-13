@@ -14,7 +14,7 @@ class ContactTableViewController: UITableViewController {
     var contactsArray: [Person] = []
     var filteredContact: [Person] = []
     let searchController = UISearchController(searchResultsController: nil)
-
+    var isExpanded: [Bool] = [true, true, true, true, true, true]
     lazy var contacts: [CNContact] = {
         let contactStore = CNContactStore()
         let keysToFetch: [Any] = [
@@ -78,10 +78,13 @@ class ContactTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isFiltering() {
-            return filteredContact.count
-        } else {
-            return contactsArray.count
+        if isExpanded[section] {
+            if isFiltering() {
+                return filteredContact.count
+            } else {
+                return contactsArray.count
+            } } else {
+            return 0
         }
     }
 
@@ -117,6 +120,7 @@ class ContactTableViewController: UITableViewController {
         let headerButton = UIButton(type: .system)
         headerButton.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         headerButton.addTarget(self, action: #selector(handleExpandClose), for: .touchUpInside)
+        headerButton.tag = section
         switch section {
         case 0:
             headerButton.setTitle("Tomorrow", for: .normal)
@@ -139,16 +143,21 @@ class ContactTableViewController: UITableViewController {
         }
     }
     
-    @objc func handleExpandClose() {
-        let section = 0
-        var indexPaths = [IndexPath]()
-        for row in contacts.indices {
-            let indexPath = IndexPath(row: row, section: section)
-            print(0,row)
-            indexPaths.append(indexPath)
-        }
-        contacts.removeAll()
-        tableView.deleteRows(at: indexPaths, with: .fade)
+    @objc func handleExpandClose(headerButton: UIButton) {
+        print(isExpanded)
+        let section = headerButton.tag
+        isExpanded[section] = !isExpanded[section]
+        tableView.reloadSections(IndexSet(section...section),with: .automatic)
+
+        a
+//        var indexPaths = [IndexPath]()
+//        for row in contacts.indices {
+//            let indexPath = IndexPath(row: row, section: section)
+//            print(0,row)
+//            indexPaths.append(indexPath)
+//        }
+//        contacts.removeAll()
+//        tableView.deleteRows(at: indexPaths, with: .fade)
     }
     
     
