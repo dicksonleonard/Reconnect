@@ -12,7 +12,10 @@ class OnboardingViewController: UIViewController {
 
     var onboardingPageView: UIPageViewController!
     var pages = [UIViewController]()
+    
     @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var contactButtonView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,10 +30,14 @@ class OnboardingViewController: UIViewController {
         let pageOne = storyboard.instantiateViewController(withIdentifier: "ob1")
         let pageTwo = storyboard.instantiateViewController(withIdentifier: "ob2")
         let pageThree = storyboard.instantiateViewController(withIdentifier: "ob3")
+        let pageFour = storyboard.instantiateViewController(withIdentifier: "ob4")
+        let pageFive = storyboard.instantiateViewController(withIdentifier: "ob5")
         
         pages.append(pageOne)
         pages.append(pageTwo)
         pages.append(pageThree)
+        pages.append(pageFour)
+        pages.append(pageFive)
         
         onboardingPageView.setViewControllers([pageOne], direction: .forward, animated: false, completion: nil)
         
@@ -40,7 +47,33 @@ class OnboardingViewController: UIViewController {
     }
     
     @IBAction func showNextPage(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+        pageControl.currentPage += 1
+        
+        if pageControl.currentPage < 4 {
+            // Page 1-4 : Show next page
+            let nextViewController = pages[pageControl.currentPage+1]
+            onboardingPageView.setViewControllers([nextViewController], direction: .forward, animated: true, completion: nil)
+        } else {
+            // Page 5 : Show add contact options
+            UIView.animate(withDuration: 1.0) {
+                self.nextButton.isHidden = true
+                self.contactButtonView.isHidden = false
+            }
+        }
+    }
+    
+    @IBAction func getDeviceContact(_ sender: UIButton) {
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        
+        if let delegate = appDelegate {
+            delegate.fetchContact()
+        }
+        
+        goToHome(self)
+    }
+    
+    @IBAction func goToHome(_ sender: Any) {
+        performSegue(withIdentifier: "ShowMain", sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -53,9 +86,6 @@ class OnboardingViewController: UIViewController {
         print("valuechanged")
     }
     
-    @IBAction func tapped(_ sender: Any) {
-        print("tapped")
-    }
     /*
     // MARK: - Navigation
 
@@ -94,7 +124,7 @@ extension OnboardingViewController: UIPageViewControllerDelegate, UIPageViewCont
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         let index = pages.index(of: pendingViewControllers[0])
         if let currentPage = index {
-//            pageControl.currentPage = currentPage
+            pageControl.currentPage = currentPage
         }
     }
     
@@ -103,7 +133,7 @@ extension OnboardingViewController: UIPageViewControllerDelegate, UIPageViewCont
         if !completed {
             let index = pages.index(of: previousViewControllers[0])
             if let previousPage = index {
-//                pageControl.currentPage = previousPage
+                pageControl.currentPage = previousPage
             }
         }
     }

@@ -23,19 +23,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         UserDefaults.standard.register(defaults: ["SeenOnboarding": false])
         
-//        if UserDefaults.standard.bool(forKey: "SeenOnboarding") {
-//            // User has seen onboarding, show app
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let initialViewController = storyboard.instantiateViewController(withIdentifier: "Root")
-//            window?.rootViewController = initialViewController
-//        } else {
+        if UserDefaults.standard.bool(forKey: "SeenOnboarding") {
+            // User has seen onboarding, show app
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: "Root")
+            window?.rootViewController = initialViewController
+        } else {
             // First time user, show onboarding
             let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
             let initialViewController = storyboard.instantiateViewController(withIdentifier: "Onboarding")
             window?.rootViewController = initialViewController
             
-            UserDefaults.standard.set(true, forKey: "SeenOnboarding ")
-//        }
+            UserDefaults.standard.set(true, forKey: "SeenOnboarding")
+        }
         
         window?.makeKeyAndVisible()
         
@@ -115,7 +115,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             contacts.append(Person(name: "\(contact.givenName) \(contact.familyName)"))
         }
     }
-    
     
     // MARK: - Core Data stack
     
