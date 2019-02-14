@@ -22,7 +22,10 @@ class ContactTableViewController: UITableViewController {
             CNContactEmailAddressesKey,
             CNContactPhoneNumbersKey,
             CNContactImageDataAvailableKey,
-            CNContactThumbnailImageDataKey]
+            CNContactThumbnailImageDataKey,
+            CNContactEmailAddressesKey,
+            CNContactPhoneNumbersKey,
+            CNContactNoteKey]
 
         // Get all the containers
         var allContainers: [CNContainer] = []
@@ -66,7 +69,10 @@ class ContactTableViewController: UITableViewController {
 
         // Transfer device contacts to app contacts
         for contact in contacts {
-            contactsArray.append(Person(name: "\(contact.givenName) \(contact.familyName)"))
+            let phoneNumber = contact.phoneNumbers.first?.value.stringValue ?? "-"
+            let emailAddress = contact.emailAddresses.first?.value ?? "-"
+            
+            contactsArray.append(Person(name: "\(contact.givenName) \(contact.familyName)", mobileNumber: "\(phoneNumber)", email: "\(emailAddress)", personalNotes: contact.note))
         }
     }
 
@@ -176,18 +182,20 @@ class ContactTableViewController: UITableViewController {
         return searchController.isActive && !searchBarIsEmpty()
     }
 
-    @IBAction func addContact(_ sender: Any) {
-        
-    }
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToContactDetails" {
+            if let destination = segue.destination as? ContactDetailTableViewController,
+                let row = tableView.indexPathForSelectedRow?.row {
+                    destination.selectedContact = contactsArray[row]
+            }
+            
+        }
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
-    */
 
 }
 

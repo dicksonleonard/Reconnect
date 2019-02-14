@@ -67,7 +67,7 @@
                                 <connections>
                                     <outlet property="nameLabel" destination="aA1-SK-Jrs" id="PwL-4l-wTZ"/>
                                     <outlet property="profileImageView" destination="Sb8-l0-5BF" id="OBY-JD-bku"/>
-                                    <segue destination="Rrq-8j-0Fi" kind="show" id="Zau-5T-ygy"/>
+                                    <segue destination="Rrq-8j-0Fi" kind="show" identifier="goToContactDetails" id="Zau-5T-ygy"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -89,11 +89,11 @@
             </objects>
             <point key="canvasLocation" x="2036" y="366"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Contact Detail Table View Controller-->
         <scene sceneID="amB-Oc-QdU">
             <objects>
-                <tableViewController id="Rrq-8j-0Fi" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="fS8-EC-qza">
+                <tableViewController id="Rrq-8j-0Fi" customClass="ContactDetailTableViewController" customModule="Reconnect" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="fS8-EC-qza">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -129,18 +129,27 @@
                                                             <state key="normal" image="telephoneIcon">
                                                                 <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="callMobileButton:" destination="Rrq-8j-0Fi" eventType="touchUpInside" id="lhO-e2-P5V"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hn3-69-tE6">
                                                             <rect key="frame" x="81.999999999999986" y="0.0" width="39" height="40"/>
                                                             <state key="normal" image="eMailIcon">
                                                                 <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="emailButton:" destination="Rrq-8j-0Fi" eventType="touchUpInside" id="ulV-4X-Jtl"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wsf-yp-Goz">
                                                             <rect key="frame" x="164" y="0.0" width="39" height="40"/>
                                                             <state key="normal" image="messageIcon">
                                                                 <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="messageButton:" destination="Rrq-8j-0Fi" eventType="touchUpInside" id="Szg-HR-71p"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <constraints>
@@ -276,6 +285,7 @@
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    <dataDetectorType key="dataDetectorTypes" link="YES" address="YES"/>
                                                 </textView>
                                             </subviews>
                                             <constraints>
@@ -402,6 +412,18 @@
                             <outlet property="delegate" destination="Rrq-8j-0Fi" id="Sqg-hH-tha"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="callIconOutlet" destination="SXi-za-ABb" id="IXg-Nc-Car"/>
+                        <outlet property="emailIconOutlet" destination="hn3-69-tE6" id="Ekb-dt-quG"/>
+                        <outlet property="emailLabelOutlet" destination="hLm-fQ-xs2" id="4hI-98-LmW"/>
+                        <outlet property="messageIconOutlet" destination="Wsf-yp-Goz" id="sty-yb-i8F"/>
+                        <outlet property="messageLabelOutlet" destination="UL5-Hd-wFX" id="Y3U-R7-aKs"/>
+                        <outlet property="mobileLabelOutlet" destination="a1R-zk-bt9" id="tDb-QA-nM5"/>
+                        <outlet property="nameLabelOutlet" destination="bFn-XZ-kLX" id="18w-Nn-RQm"/>
+                        <outlet property="notesLabelOutlet" destination="be6-jL-IJu" id="AsG-KK-fnF"/>
+                        <outlet property="photoUIImageView" destination="wci-LX-aYh" id="aFN-EC-6JG"/>
+                        <outlet property="remindPickerView" destination="OMk-eq-RIA" id="iBr-k2-Zv3"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n38-Fo-wDB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
