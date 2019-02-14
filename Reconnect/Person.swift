@@ -18,15 +18,20 @@ enum Periode {
 }
 
 struct Person {
+    var identifier: String?
     var name: String
     var jobTitle: String?
     var image: UIImage?
     var periode: Periode
+    var lastContact: Date?
+    var nextContact: Date?
 
-    init(name: String, jobTitle: String? = nil, image: UIImage? = nil, periode: Periode = .notIntroduced) {
+    init(name: String, jobTitle: String? = nil, image: UIImage? = nil, periode: Periode = .notIntroduced, lastContact: Date = Date(), nextContact: Date = Date()) {
         self.name = name
         self.jobTitle = jobTitle
         self.image = image
         self.periode = periode
+        self.lastContact = lastContact
+        self.nextContact = nextContact
     }
 }

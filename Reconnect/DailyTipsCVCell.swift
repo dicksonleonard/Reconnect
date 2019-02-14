@@ -8,4 +8,8 @@
 
 import UIKit
 
-class DailyTipsCVCell: UICollectionViewCell {}
+class DailyTipsCVCell: UICollectionViewCell {
+    
+    @IBOutlet weak var tipsLabel: UILabel!
+    //TODO: create a data source about tips to show here
+}

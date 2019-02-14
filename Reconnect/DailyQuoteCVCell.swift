@@ -10,4 +10,7 @@ import UIKit
 
 class DailyQuoteCVCell: UICollectionViewCell {
 
+    @IBOutlet weak var quoteLabel: UILabel!
+    
+    //TODO: create a data source about quote to show here
 }

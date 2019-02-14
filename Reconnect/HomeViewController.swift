@@ -7,79 +7,105 @@
 //
 
 import UIKit
+import Contacts
 
-class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
-    @IBOutlet weak var dailyQuoteButton: UIButton!
-    @IBOutlet weak var dailyTipsButton: UIButton!
-    @IBOutlet weak var dailyContentCV: UICollectionView!
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    @IBOutlet weak var homeTableView: UITableView!
+    @IBOutlet weak var dailyContentTableHeader: UIView!
+    private var needToAddTagContactsArray: [Person] = []
+    private var needToReminderContactsArray: [Person] = []
+
     override func viewDidLoad() {
-        super.viewDidLoad()        // Do any additional setup after loading the view.
-        dailyContentCV.isPagingEnabled = true
-        dailyContentCV.delegate = self
-        dailyContentCV.dataSource = self
+        super.viewDidLoad()
+        homeTableView.delegate = self
+        homeTableView.dataSource = self
         
-//        self.dailyContentCV!.register(DailyQuoteCVCell.self, forCellWithReuseIdentifier: "dailyQuoteCell")
-//        self.dailyContentCV!.register(DailyTipsCVCell.self, forCellWithReuseIdentifier: "dailyQuoteCell")
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        if let flowLayout = self.dailyContentCV.collectionViewLayout as? UICollectionViewFlowLayout {
-            flowLayout.itemSize = CGSize(width: self.dailyContentCV.bounds.width,
-                                        height: self.dailyContentCV.bounds.height)
+        // MARK: need to create connection between Person and CNContact
+        let contacts = ContactTableViewController().contacts
+        for contact in contacts {
+            needToAddTagContactsArray.append(Person(name: "\(contact.givenName) \(contact.familyName)"))
+            needToReminderContactsArray.append(Person(name: "\(contact.givenName) \(contact.familyName)"))
         }
     }
 
-    @IBAction func changeToDailyQuote(_ sender: Any) {
-        dailyQuoteButton.setTitleColor(.black, for: .normal)
-        dailyTipsButton.setTitleColor(.gray, for: .normal)
-//        dailyContentCV.beginInteractiveMovementForItem(at: IndexPath.init(item: 0, section: 0))
-//        dailyContentCV.updateInteractiveMovementTargetPosition(CGPoint(x: 0, y: 0))
-//        dailyContentCV.endInteractiveMovement()
-    }
-
-    @IBAction func changeToDailyTips(_ sender: Any) {
-//        dailyTipsButton.setTitleColor(.black, for: .normal)
-//        dailyQuoteButton.setTitleColor(.gray, for: .normal)
-//        print("sections:  \(dailyContentCV.numberOfSections)")
-//        print("item in section 0:  \(dailyContentCV.numberOfItems(inSection: 0))")
-        dailyContentCV.selectItem(at: dailyContentCV.indexPathsForVisibleItems[0],
-                                  animated: true, scrollPosition: UICollectionView.ScrollPosition.left)
-//       print("item in section 1:  \(dailyContentCV.numberOfItems(inSection: 1))")
-//        print("Index path for item:  \(dailyContentCV.indexPathForItem(at: CGPoint(x: 0, y: 0)) as Any)")
-//                dailyContentCV.beginInteractiveMovementForItem(at: IndexPath.init(item: 1, section: 0))
-//        dailyContentCV.updateInteractiveMovementTargetPosition(CGPoint(x: 0, y: 0))
-//        dailyContentCV.endInteractiveMovement()
-    }
-
-    // delegate
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.item + 1)
-    }
-
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
-    }
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return needToAddTagContactsArray.count
+        } else if section == 1 {
+            return needToReminderContactsArray.count
+        }
         return 1
     }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print(indexPath)
-        if indexPath.section == 0 {
-            if let dailyQuoteCVCell = collectionView.dequeueReusableCell(withReuseIdentifier: "dailyQuoteCell", for: indexPath) as? DailyQuoteCVCell {
-                dailyQuoteCVCell.backgroundColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
-                return dailyQuoteCVCell
-            }
-        }
-        
-        let dailyTipsCVCell = collectionView.dequeueReusableCell(withReuseIdentifier: "dailyTipsCell", for: indexPath) as? DailyTipsCVCell
-        dailyTipsCVCell?.backgroundColor = #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)
-        return dailyTipsCVCell ?? UICollectionViewCell()
-        
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 2
     }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "homeContactCell", for: indexPath) as? HomeContactCell {
+            
+            if indexPath.section == 0 {
+                cell.nameLabel.text = needToAddTagContactsArray[indexPath.row].name
+                cell.profileImageView.image = UIImage(named: "Perik")
+            } else if indexPath.section == 1 {
+                cell.nameLabel.text = needToReminderContactsArray[indexPath.row].name
+                cell.profileImageView.image = UIImage(named: "Perik")
+            }
+            return cell
+        }
+        return UITableViewCell()
+    }
+    
+    // MARK: set for tableView section header
 
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "People I want to reconnect this week"
+        } else if section == 1 {
+            return "People I haven’t reconnect with"
+        }
+        return "Section \(section)"
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.clear
+        let screenRect = UIScreen.main.bounds
+        let headerLabel = UILabel(frame: CGRect(x: 16, y: 0, width: screenRect.width, height: 100))
+        headerLabel.font = UIFont.boldSystemFont(ofSize: 27)
+        headerLabel.textColor = UIColor.black
+        headerLabel.text = self.tableView(tableView, titleForHeaderInSection: section)
+        headerLabel.numberOfLines = 0
+        headerView.addSubview(headerLabel)
+        
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 100
+    }
+    
+    // MARK: Set the tableView section footer
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 100))
+        let showMoreButton = UIButton(frame: CGRect(x: 0, y: 0, width: tableView.frame.width * 0.9, height: footerView.frame.height * 0.6))
+        showMoreButton.center = CGPoint(x: footerView.center.x, y: 40)
+        showMoreButton.setTitle("Show More", for: UIControl.State.normal)
+        showMoreButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        showMoreButton.backgroundColor = UIColor(red: 0, green: 206, blue: 191, alpha: 1.0)
+        showMoreButton.layer.cornerRadius = 10.0
+        footerView.addSubview(showMoreButton)
+        return footerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 100
+    }
+    
     /*
     // MARK: - Navigation
 
