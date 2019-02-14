@@ -20,26 +20,42 @@ class ContactDetailTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
+        // MARK: Filling contents for Contact Details.
         if let contact = selectedContact {
-            self.title = contact.name
+            self.title = "Details"
             photoUIImageView.image = contact.image
             nameLabelOutlet.text = contact.name
             mobileLabelOutlet.text = contact.mobileNumber
             emailLabelOutlet.text = contact.email
             messageLabelOutlet.text = contact.mobileNumber
             notesLabelOutlet.text = contact.personalNotes
+            
+            // MARK: Change the button if no data is present
             if contact.email == "-" {
-                emailIconOutlet.imageView?.image = #imageLiteral(resourceName: "eMailDeactivatedIcon")
-                emailIconOutlet.imageView?.image = #imageLiteral(resourceName: "eMailDeactivatedIcon")
+                emailIconOutlet.setImage(#imageLiteral(resourceName: "eMailDeactivatedIcon"), for: .normal)
+                emailIconOutlet.isEnabled = false
             } else {
-                emailIconOutlet.imageView?.image = #imageLiteral(resourceName: "eMailIcon")
-            }
+                emailIconOutlet.setImage(#imageLiteral(resourceName: "eMailIcon"), for: .normal)
+                emailIconOutlet.isEnabled = true }
+            
+            if contact.mobileNumber == "-" {
+                callIconOutlet.setImage(#imageLiteral(resourceName: "telephoneDeactivatedIcon"), for: .normal)
+                callIconOutlet.isEnabled = false
+            } else {
+                callIconOutlet.setImage(#imageLiteral(resourceName: "telephoneIcon"), for: .normal)
+                callIconOutlet.isEnabled = true }
+            
+            if contact.mobileNumber == "-" {
+                messageIconOutlet.setImage(#imageLiteral(resourceName: "messageDeactivatedIcon"), for: .normal)
+                messageIconOutlet.isEnabled = false
+            } else {
+                messageIconOutlet.setImage(#imageLiteral(resourceName: "messageIcon"), for: .normal)
+                messageIconOutlet.isEnabled = true }
         }
         
     }
     
     // MARK: - IB Stuffs
-    
     @IBOutlet weak var photoUIImageView: UIImageView!
     @IBOutlet weak var nameLabelOutlet: UILabel!
     @IBOutlet weak var mobileLabelOutlet: UILabel!
@@ -53,7 +69,19 @@ class ContactDetailTableViewController: UITableViewController {
     
     @IBOutlet weak var remindPickerView: UIPickerView!
     
+    // MARK: Top buttons
     
+    @IBAction func callMobileButton(_ sender: UIButton) {
+        makeAPhoneCall()
+    }
+    @IBAction func emailButton(_ sender: UIButton) {
+    }
+    @IBAction func messageButton(_ sender: UIButton) {
+    }
+    
+    func makeAPhoneCall() {
+        
+    }
     /*
     // MARK: - Table view data source
 

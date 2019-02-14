@@ -86,7 +86,7 @@
         <scene sceneID="amB-Oc-QdU">
             <objects>
                 <tableViewController id="Rrq-8j-0Fi" customClass="ContactDetailTableViewController" customModule="Reconnect" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="fS8-EC-qza">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="fS8-EC-qza">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -122,18 +122,27 @@
                                                             <state key="normal" image="telephoneIcon">
                                                                 <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="callMobileButton:" destination="Rrq-8j-0Fi" eventType="touchUpInside" id="lhO-e2-P5V"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hn3-69-tE6">
                                                             <rect key="frame" x="81.999999999999986" y="0.0" width="39" height="40"/>
                                                             <state key="normal" image="eMailIcon">
                                                                 <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="emailButton:" destination="Rrq-8j-0Fi" eventType="touchUpInside" id="ulV-4X-Jtl"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wsf-yp-Goz">
                                                             <rect key="frame" x="164" y="0.0" width="39" height="40"/>
                                                             <state key="normal" image="messageIcon">
                                                                 <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="messageButton:" destination="Rrq-8j-0Fi" eventType="touchUpInside" id="Szg-HR-71p"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <constraints>
