@@ -76,7 +76,14 @@
                             <outlet property="delegate" destination="37o-Oj-K7h" id="kKa-UH-nfd"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="oop-Uk-X26"/>
+                    <navigationItem key="navigationItem" id="oop-Uk-X26">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="GfF-Hu-lGQ">
+                            <connections>
+                                <action selector="addContact:" destination="37o-Oj-K7h" id="1Dn-I1-BSh"/>
+                                <segue destination="yqy-0f-b5B" kind="presentation" id="7BO-LS-bnN"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mlz-Mw-vdo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -419,6 +426,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F5M-wO-xdL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1165.5999999999999" y="366.56671664167919"/>
+        </scene>
+        <!--AddContact-->
+        <scene sceneID="I49-jW-u0x">
+            <objects>
+                <viewControllerPlaceholder storyboardName="AddContact" id="yqy-0f-b5B" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ACa-Wd-ye8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2636" y="-202"/>
         </scene>
     </scenes>
     <resources>

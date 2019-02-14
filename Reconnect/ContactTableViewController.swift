@@ -176,6 +176,9 @@ class ContactTableViewController: UITableViewController {
         return searchController.isActive && !searchBarIsEmpty()
     }
 
+    @IBAction func addContact(_ sender: Any) {
+        
+    }
     /*
     // MARK: - Navigation
 

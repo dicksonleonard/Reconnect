@@ -9,12 +9,12 @@
 import Foundation
 import UIKit
 
-enum Periode {
-    case oneMonth
-    case sixMonth
-    case oneYear
-    case skipped
-    case notIntroduced
+enum Periode: String, CaseIterable {
+    case oneMonth = "One Month"
+    case sixMonth = "Six Month"
+    case oneYear = "One Year"
+    case skipped = "Skipped"
+    case notIntroduced = "Not Introduced"
 }
 
 struct Person {
