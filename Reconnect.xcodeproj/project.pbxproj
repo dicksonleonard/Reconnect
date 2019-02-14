@@ -13,6 +13,8 @@
 		5C45CA65220D65E800375DA5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45CA64220D65E800375DA5 /* HomeViewController.swift */; };
 		5C45CA69220D721A00375DA5 /* DailyTipsCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45CA68220D721A00375DA5 /* DailyTipsCVCell.swift */; };
 		5C45CA6B220D724E00375DA5 /* DailyQuoteCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45CA6A220D724E00375DA5 /* DailyQuoteCVCell.swift */; };
+		5C55861C22134D2E00CCA20C /* ContactDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C55861B22134D2E00CCA20C /* ContactDetailTableViewController.swift */; };
+		5C5731C42213F4BF00992AE2 /* ReconnectModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5C5731C22213F4BF00992AE2 /* ReconnectModel.xcdatamodeld */; };
 		7162FE7B220C1CE9009B1093 /* Contacts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7162FE7A220C1CE9009B1093 /* Contacts.storyboard */; };
 		7162FE7E220C1DDC009B1093 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7162FE7C220C1DDC009B1093 /* Settings.storyboard */; };
 		7162FE81220D2E9B009B1093 /* ContactTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7162FE7F220D2E9B009B1093 /* ContactTableViewController.swift */; };
@@ -51,6 +53,8 @@
 		5C45CA64220D65E800375DA5 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		5C45CA68220D721A00375DA5 /* DailyTipsCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTipsCVCell.swift; sourceTree = "<group>"; };
 		5C45CA6A220D724E00375DA5 /* DailyQuoteCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyQuoteCVCell.swift; sourceTree = "<group>"; };
+		5C55861B22134D2E00CCA20C /* ContactDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailTableViewController.swift; sourceTree = "<group>"; };
+		5C5731C32213F4BF00992AE2 /* ReconnectModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ReconnectModel.xcdatamodel; sourceTree = "<group>"; };
 		7162FE7A220C1CE9009B1093 /* Contacts.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Contacts.storyboard; sourceTree = "<group>"; };
 		7162FE7D220C1DDC009B1093 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
 		7162FE7F220D2E9B009B1093 /* ContactTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTableViewController.swift; sourceTree = "<group>"; };
@@ -99,6 +103,8 @@
 		71BFDA82220C188300E771FF = {
 			isa = PBXGroup;
 			children = (
+				5C5731C22213F4BF00992AE2 /* ReconnectModel.xcdatamodeld */,
+				5C55861B22134D2E00CCA20C /* ContactDetailTableViewController.swift */,
 				5C0440CB22112F4D009F75CA /* .swiftlint.yml */,
 				71BFDA8D220C188300E771FF /* Reconnect */,
 				71BFDAA2220C188500E771FF /* ReconnectTests */,
@@ -318,12 +324,14 @@
 				7162FE84220D5BBA009B1093 /* ContactCell.swift in Sources */,
 				7162FE82220D2E9B009B1093 /* Person.swift in Sources */,
 				7162FE81220D2E9B009B1093 /* ContactTableViewController.swift in Sources */,
+				5C5731C42213F4BF00992AE2 /* ReconnectModel.xcdatamodeld in Sources */,
 				71BFDA8F220C188300E771FF /* AppDelegate.swift in Sources */,
 				5C45CA65220D65E800375DA5 /* HomeViewController.swift in Sources */,
 				5C0440CE221157AB009F75CA /* HomeHeaderViewController.swift in Sources */,
 				5C45CA69220D721A00375DA5 /* DailyTipsCVCell.swift in Sources */,
 				5C45CA6B220D724E00375DA5 /* DailyQuoteCVCell.swift in Sources */,
 				5C1587AF221267960087207A /* HomeContactCell.swift in Sources */,
+				5C55861C22134D2E00CCA20C /* ContactDetailTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -515,6 +523,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3NB6889R79;
 				INFOPLIST_FILE = Reconnect/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -532,6 +541,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3NB6889R79;
 				INFOPLIST_FILE = Reconnect/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -662,6 +672,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		5C5731C22213F4BF00992AE2 /* ReconnectModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5C5731C32213F4BF00992AE2 /* ReconnectModel.xcdatamodel */,
+			);
+			currentVersion = 5C5731C32213F4BF00992AE2 /* ReconnectModel.xcdatamodel */;
+			path = ReconnectModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 71BFDA83220C188300E771FF /* Project object */;
 }

@@ -41,7 +41,7 @@ class HomeHeaderViewController: UIViewController, UICollectionViewDelegate, UICo
         }
         dailyContentCV.scrollToItem(at: IndexPath(item: 1, section: 0), at: scrollDirection, animated: true)
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 2
     }
@@ -52,13 +52,10 @@ class HomeHeaderViewController: UIViewController, UICollectionViewDelegate, UICo
             if let dailyQuoteCVCell = collectionView.dequeueReusableCell(withReuseIdentifier: "dailyQuoteCell", for: indexPath) as? DailyQuoteCVCell {
                 quoteButton.setTitleColor(.black, for: UIControl.State.normal)
                 tipsButton.setTitleColor(.gray, for: UIControl.State.normal)
-                dailyQuoteCVCell.quoteLabel.text = "this is for quote"
                 return dailyQuoteCVCell
             }
         } else if indexPath.row == 1 {
             if let dailyTipsCVCell = collectionView.dequeueReusableCell(withReuseIdentifier: "dailyTipsCell", for: indexPath) as? DailyTipsCVCell {
-                dailyTipsCVCell.backgroundColor = #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)
-                    dailyTipsCVCell.tipsLabel.text = "this is for tips"
                 quoteButton.setTitleColor(.gray, for: UIControl.State.normal)
                 tipsButton.setTitleColor(.black, for: UIControl.State.normal)
                 return dailyTipsCVCell
@@ -86,5 +83,7 @@ class HomeHeaderViewController: UIViewController, UICollectionViewDelegate, UICo
             tipsButton.setTitleColor(.black, for: UIControl.State.normal)
         }
     }
+    
+    
 
 }

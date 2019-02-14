@@ -7,22 +7,35 @@
 //
 
 import UIKit
+import Contacts
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var homeTableView: UITableView!
     @IBOutlet weak var dailyContentTableHeader: UIView!
-    private let needToAddTagContacts: [Person] = []
-   
+    private var needToAddTagContactsArray: [Person] = []
+    private var needToReminderContactsArray: [Person] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        dailyContentTableHeader.frame(forAlignmentRect: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: homeTableView.visibleSize.width, height: homeTableView.visibleSize.height * 0.4)))
         homeTableView.delegate = self
         homeTableView.dataSource = self
+        
+        // MARK: need to create connection between Person and CNContact
+        let contacts = ContactTableViewController().contacts
+        for contact in contacts {
+            needToAddTagContactsArray.append(Person(name: "\(contact.givenName) \(contact.familyName)"))
+            needToReminderContactsArray.append(Person(name: "\(contact.givenName) \(contact.familyName)"))
+        }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        if section == 0 {
+            return needToAddTagContactsArray.count
+        } else if section == 1 {
+            return needToReminderContactsArray.count
+        }
+        return 1
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -33,14 +46,66 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "homeContactCell", for: indexPath) as? HomeContactCell {
-            cell.nameLabel.text = "aaaa"
-            cell.backgroundColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
-            cell.profileImageView.image = UIImage(named: "Perik")
+            
+            if indexPath.section == 0 {
+                cell.nameLabel.text = needToAddTagContactsArray[indexPath.row].name
+                cell.profileImageView.image = UIImage(named: "Perik")
+            } else if indexPath.section == 1 {
+                cell.nameLabel.text = needToReminderContactsArray[indexPath.row].name
+                cell.profileImageView.image = UIImage(named: "Perik")
+            }
             return cell
         }
-    return UITableViewCell()
+        return UITableViewCell()
     }
+    
+    // MARK: set for tableView section header
 
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "People I want to reconnect this week"
+        } else if section == 1 {
+            return "People I haven’t reconnect with"
+        }
+        return "Section \(section)"
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.clear
+        let screenRect = UIScreen.main.bounds
+        let headerLabel = UILabel(frame: CGRect(x: 16, y: 0, width: screenRect.width, height: 100))
+        headerLabel.font = UIFont.boldSystemFont(ofSize: 27)
+        headerLabel.textColor = UIColor.black
+        headerLabel.text = self.tableView(tableView, titleForHeaderInSection: section)
+        headerLabel.numberOfLines = 0
+        headerView.addSubview(headerLabel)
+        
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 100
+    }
+    
+    // MARK: Set the tableView section footer
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 100))
+        let showMoreButton = UIButton(frame: CGRect(x: 0, y: 0, width: tableView.frame.width * 0.9, height: footerView.frame.height * 0.6))
+        showMoreButton.center = CGPoint(x: footerView.center.x, y: 40)
+        showMoreButton.setTitle("Show More", for: UIControl.State.normal)
+        showMoreButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        showMoreButton.backgroundColor = UIColor(red: 0, green: 206, blue: 191, alpha: 1.0)
+        showMoreButton.layer.cornerRadius = 10.0
+        footerView.addSubview(showMoreButton)
+        return footerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 100
+    }
+    
     /*
     // MARK: - Navigation
 
