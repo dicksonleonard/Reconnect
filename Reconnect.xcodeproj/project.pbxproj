@@ -110,7 +110,6 @@
 		71BFDA82220C188300E771FF = {
 			isa = PBXGroup;
 			children = (
-				5C55861B22134D2E00CCA20C /* ContactDetailTableViewController.swift */,
 				5C0440CB22112F4D009F75CA /* .swiftlint.yml */,
 				71BFDA8D220C188300E771FF /* Reconnect */,
 				71BFDAA2220C188500E771FF /* ReconnectTests */,
@@ -132,6 +131,7 @@
 		71BFDA8D220C188300E771FF /* Reconnect */ = {
 			isa = PBXGroup;
 			children = (
+				5C55861B22134D2E00CCA20C /* ContactDetailTableViewController.swift */,
 				719A0AF52214FA690063FDA4 /* HomeHeaderViewController.swift */,
 				7162FE7F220D2E9B009B1093 /* ContactTableViewController.swift */,
 				7162FE80220D2E9B009B1093 /* Person.swift */,
@@ -537,7 +537,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5PUSGPU2VB;
+				DEVELOPMENT_TEAM = LG953FVPQT;
 				INFOPLIST_FILE = Reconnect/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -555,7 +555,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5PUSGPU2VB;
+				DEVELOPMENT_TEAM = LG953FVPQT;
 				INFOPLIST_FILE = Reconnect/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
