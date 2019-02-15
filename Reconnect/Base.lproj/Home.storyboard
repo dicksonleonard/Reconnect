@@ -155,7 +155,7 @@
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <view key="backgroundView" contentMode="scaleToFill" fixedFrame="YES" id="vra-LD-Nke">
-                                            <rect key="frame" x="229" y="0.0" width="189" height="216"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="189" height="216"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
@@ -309,11 +309,11 @@
             </objects>
             <point key="canvasLocation" x="3616.8000000000002" y="-193.4032983508246"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Today-->
         <scene sceneID="zBG-yW-ob4">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7sy-MT-z0l" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" systemItem="recents" id="Zpx-mU-fnH"/>
+                    <tabBarItem key="tabBarItem" title="Today" image="today" selectedImage="today_on" id="Zpx-mU-fnH"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5b7-Ym-fei">
@@ -333,5 +333,7 @@
     <resources>
         <image name="Perik" width="39" height="39"/>
         <image name="tips" width="39" height="39"/>
+        <image name="today" width="26" height="26"/>
+        <image name="today_on" width="26" height="26"/>
     </resources>
 </document>

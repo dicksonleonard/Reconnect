@@ -27,7 +27,7 @@ class FadeSegue: UIStoryboardSegue {
             destinationView.alpha = 0
             sourceView.addSubview(destinationView)
             // Animate the fade, remove the destination view on completion and present the full view controller
-            UIView.animate(withDuration: 1, animations: {
+            UIView.animate(withDuration: 0.3, animations: {
                 destinationView.alpha = 1
             }, completion: { (_) in
                 destinationView.removeFromSuperview()

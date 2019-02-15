@@ -82,10 +82,6 @@ class OnboardingViewController: UIViewController {
         }
     }
     
-    @IBAction func pageChanged(_ sender: UIPageControl) {
-        print("valuechanged")
-    }
-    
     /*
     // MARK: - Navigation
 
@@ -125,6 +121,23 @@ extension OnboardingViewController: UIPageViewControllerDelegate, UIPageViewCont
         let index = pages.index(of: pendingViewControllers[0])
         if let currentPage = index {
             pageControl.currentPage = currentPage
+            
+            if currentPage == 4 {
+                if self.contactButtonView.isHidden {
+                    UIView.animate(withDuration: 1.0) {
+                        self.nextButton.isHidden = true
+                        self.contactButtonView.isHidden = false
+                    }
+                }
+            }
+            else {
+                if !self.contactButtonView.isHidden {
+                    UIView.animate(withDuration: 1.0) {
+                        self.nextButton.isHidden = false
+                        self.contactButtonView.isHidden = true
+                    }
+                }
+            }
         }
     }
     
@@ -134,6 +147,23 @@ extension OnboardingViewController: UIPageViewControllerDelegate, UIPageViewCont
             let index = pages.index(of: previousViewControllers[0])
             if let previousPage = index {
                 pageControl.currentPage = previousPage
+                
+                if previousPage == 4 {
+                    if self.contactButtonView.isHidden {
+                        UIView.animate(withDuration: 1.0) {
+                            self.nextButton.isHidden = true
+                            self.contactButtonView.isHidden = false
+                        }
+                    }
+                }
+                else {
+                    if !self.contactButtonView.isHidden {
+                        UIView.animate(withDuration: 1.0) {
+                            self.nextButton.isHidden = false
+                            self.contactButtonView.isHidden = true
+                        }
+                    }
+                }
             }
         }
     }

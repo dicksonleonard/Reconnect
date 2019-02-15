@@ -429,11 +429,11 @@
             </objects>
             <point key="canvasLocation" x="2841" y="366"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Contacts-->
         <scene sceneID="6oE-pm-xJL">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jUD-Dv-yLZ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="contacts" id="JMn-gh-0hW"/>
+                    <tabBarItem key="tabBarItem" title="Contacts" image="contact_disabled" selectedImage="contact_enabled" id="JMn-gh-0hW"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rYf-oY-3D6">
@@ -459,6 +459,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="contact_disabled" width="34" height="23"/>
+        <image name="contact_enabled" width="34" height="23"/>
         <image name="eMailIcon" width="39" height="39"/>
         <image name="messageIcon" width="39" height="39"/>
         <image name="telephoneIcon" width="39" height="40"/>

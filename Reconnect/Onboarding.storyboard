@@ -111,14 +111,6 @@
                                     <constraint firstItem="RVv-2d-ixH" firstAttribute="leading" secondItem="mhb-l5-yEq" secondAttribute="leading" id="w89-pe-pEK"/>
                                 </constraints>
                             </view>
-                            <visualEffectView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mAw-wK-Q5b">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="nE8-6w-YG6">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </view>
-                                <blurEffect style="light"/>
-                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -126,12 +118,8 @@
                             <constraint firstItem="I1a-sF-DMo" firstAttribute="bottom" secondItem="q6T-Ov-CuG" secondAttribute="bottom" id="C4o-lK-Uvo"/>
                             <constraint firstItem="I1a-sF-DMo" firstAttribute="leading" secondItem="q6T-Ov-CuG" secondAttribute="leading" id="CDr-4E-0VP"/>
                             <constraint firstItem="9cq-vm-KId" firstAttribute="centerX" secondItem="EOP-U1-n2r" secondAttribute="centerX" id="Cm6-fR-0r5"/>
-                            <constraint firstItem="mAw-wK-Q5b" firstAttribute="bottom" secondItem="q6T-Ov-CuG" secondAttribute="bottom" id="G8u-tf-e8g"/>
                             <constraint firstItem="5qT-NB-Ee6" firstAttribute="top" secondItem="9cq-vm-KId" secondAttribute="bottom" constant="5" id="Jfn-7r-kwv"/>
                             <constraint firstItem="I1a-sF-DMo" firstAttribute="trailing" secondItem="q6T-Ov-CuG" secondAttribute="trailing" id="VtK-g6-IfN"/>
-                            <constraint firstItem="mAw-wK-Q5b" firstAttribute="top" secondItem="EOP-U1-n2r" secondAttribute="top" id="WWA-mS-GAO"/>
-                            <constraint firstItem="mAw-wK-Q5b" firstAttribute="leading" secondItem="q6T-Ov-CuG" secondAttribute="leading" id="YtB-Xs-TrE"/>
-                            <constraint firstItem="mAw-wK-Q5b" firstAttribute="trailing" secondItem="q6T-Ov-CuG" secondAttribute="trailing" id="c5p-Vp-68n"/>
                             <constraint firstItem="mhb-l5-yEq" firstAttribute="trailing" secondItem="5qT-NB-Ee6" secondAttribute="trailing" id="icM-I0-2Dk"/>
                             <constraint firstItem="mhb-l5-yEq" firstAttribute="bottom" secondItem="5qT-NB-Ee6" secondAttribute="bottom" id="jpK-dp-KmG"/>
                             <constraint firstItem="5qT-NB-Ee6" firstAttribute="leading" secondItem="q6T-Ov-CuG" secondAttribute="leading" constant="16" id="r9Y-vY-yVy"/>
@@ -148,7 +136,7 @@
                         <outlet property="contactButtonView" destination="mhb-l5-yEq" id="cgO-k7-PB7"/>
                         <outlet property="nextButton" destination="5qT-NB-Ee6" id="O0d-NL-OzD"/>
                         <outlet property="pageControl" destination="9cq-vm-KId" id="ClC-DB-yqu"/>
-                        <segue destination="VHm-zj-Tn2" kind="custom" identifier="ShowMain" customClass="FadeSegue" customModule="Reconnect" customModuleProvider="target" id="7kg-4E-A4i"/>
+                        <segue destination="VHm-zj-Tn2" kind="showDetail" identifier="ShowMain" id="7kg-4E-A4i"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mgk-7Y-RQA" userLabel="First Responder" sceneMemberID="firstResponder"/>

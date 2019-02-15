@@ -286,10 +286,6 @@ class ContactTableViewController: UITableViewController {
             }
         }
     }
-    
-    
-
-
 }
 
 extension ContactTableViewController: UISearchResultsUpdating {
@@ -300,6 +296,23 @@ extension ContactTableViewController: UISearchResultsUpdating {
 
 extension ContactTableViewController: AddContactTableViewControllerDelegate {
     func adddedContact(_ contact: Person) {
+        
+        switch contact.periode {
+        case .nextWeek:
+            oneWeekSection.append(contact)
+        case .oneMonth:
+            oneMonthSection.append(contact)
+        case .threeMonth:
+            threeMonthSection.append(contact)
+        case .sixMonth:
+            sixMonthSection.append(contact)
+        case .oneYear:
+            oneYearSection.append(contact)
+        default:
+            return
+        }
+        
+        tableView.reloadData()
         
         // Create new phone contact to be added to device
         let newContact = CNMutableContact()
