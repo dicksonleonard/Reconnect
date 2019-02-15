@@ -21,6 +21,9 @@ class ContactDetailTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         // MARK: Filling contents for Contact Details.
+        // Show navigation bar
+        navigationController?.isNavigationBarHidden = false
+        
         if let contact = selectedContact {
             self.title = "Details"
             photoUIImageView.image = contact.image

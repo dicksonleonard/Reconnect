@@ -14,7 +14,7 @@ import Contacts
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var contacts: [Person] = []
+    var contactsArray: [Person] = []
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -84,7 +84,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             CNContactEmailAddressesKey,
             CNContactPhoneNumbersKey,
             CNContactImageDataAvailableKey,
-            CNContactThumbnailImageDataKey]
+            CNContactThumbnailImageDataKey,
+            CNContactEmailAddressesKey,
+            CNContactPhoneNumbersKey,
+            CNContactNoteKey]
         
         // Get all the containers
         var allContainers: [CNContainer] = []
@@ -112,8 +115,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         for contact in results {
-            contacts.append(Person(name: "\(contact.givenName) \(contact.familyName)"))
+            let phoneNumber = contact.phoneNumbers.first?.value.stringValue ?? "-"
+            let emailAddress = contact.emailAddresses.first?.value ?? "-"
+            
+            contactsArray.append(Person(name: "\(contact.givenName) \(contact.familyName)", mobileNumber: "\(phoneNumber)", email: "\(emailAddress)", personalNotes: contact.note))
         }
+
     }
     
     // MARK: - Core Data stack
