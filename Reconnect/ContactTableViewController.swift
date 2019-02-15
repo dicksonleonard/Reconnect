@@ -17,9 +17,13 @@ class ContactTableViewController: UITableViewController {
     let searchController = UISearchController(searchResultsController: nil)
     var isExpanded: [Bool] = [true, true, true, true, true, true, true]
     
-    var oneWeekSection:[Person] = []
-    var oneMonthSection:[Person] = []
-    
+    var oneWeekSection: [Person] = []
+    var oneMonthSection: [Person] = []
+    var threeMonthSection: [Person] = []
+    var sixMonthSection: [Person] = []
+    var oneYearSection: [Person] = []
+    var skippedSection: [Person] = []
+    var notIntroducedSection: [Person] = []
     
     lazy var contacts: [CNContact] = {
         let contactStore = CNContactStore()
@@ -76,19 +80,33 @@ class ContactTableViewController: UITableViewController {
         // Transfer device contacts to app contacts
         for contact in contacts {
             
-            var person = Person(name: contact.givenName)
-            person.lastName = contact.familyName
+            var person = Person(name: "")
+            person.name = "\(contact.givenName) \(contact.familyName)"
+            //person.lastName = contact.familyName
             person.mobileNumber = contact.phoneNumbers.first?.value.stringValue ?? "-"
             person.email = contact.emailAddresses.first?.value as String? ?? "-"
             person.personalNotes = contact.note
             person.periode = Periode.allCases.randomElement() ?? Periode.notIntroduced
             contactsArray.append(person)
-            print(person.periode)
+            //print(person.periode)
             //contactsArray.append(Person(name: "\(contact.givenName) \(contact.familyName)", mobileNumber: "\(phoneNumber)", email: "\(emailAddress)", personalNotes: contact.note))
-            
-
-            oneWeekSection.append(person)
+            switch person.periode {
+            case .nextWeek:
+                oneWeekSection.append(person)
+            case .oneMonth:
+                oneMonthSection.append(person)
+            case .threeMonth:
+                threeMonthSection.append(person)
+            case .sixMonth:
+                sixMonthSection.append(person)
+            case .oneYear:
+                oneYearSection.append(person)
+            case .skipped:
+                skippedSection.append(person)
+            default:
+                notIntroducedSection.append(person)
             }
+        }
         
     }
 
@@ -104,12 +122,27 @@ class ContactTableViewController: UITableViewController {
             if isFiltering() {
                 return filteredContact.count
             } else {
-                return contactsArray.count
-            } } else {
-            return 0
+                    switch section {
+                    case 0:
+                        return oneWeekSection.count
+                    case 1:
+                        return oneMonthSection.count
+                    case 2:
+                        return threeMonthSection.count
+                    case 3:
+                        return sixMonthSection.count
+                    case 4:
+                        return oneYearSection.count
+                    case 5:
+                        return skippedSection.count
+                    default:
+                        return notIntroducedSection.count
+                }
+            }
         }
-    }
+        return 0
 
+    }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Buat cell
         if let cell = tableView.dequeueReusableCell(withIdentifier: "contactCell", for: indexPath) as? ContactCell {
@@ -121,7 +154,22 @@ class ContactTableViewController: UITableViewController {
             personAtRow = contactsArray[indexPath.row]
         }
         
-        cell.nameLabel.text = personAtRow.name
+            switch indexPath.section {
+            case 0:
+                cell.nameLabel.text = oneWeekSection[indexPath.row].name
+            case 1:
+                cell.nameLabel.text = oneMonthSection[indexPath.row].name
+            case 2:
+                cell.nameLabel.text = threeMonthSection[indexPath.row].name
+            case 3:
+                cell.nameLabel.text = sixMonthSection[indexPath.row].name
+            case 4:
+                cell.nameLabel.text = oneYearSection[indexPath.row].name
+            case 5:
+                cell.nameLabel.text = skippedSection[indexPath.row].name
+            default:
+                cell.nameLabel.text = notIntroducedSection[indexPath.row].name
+            }
         
         // Get initial
         return cell
@@ -139,7 +187,6 @@ class ContactTableViewController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerButton = UIButton(type: .custom)
-        headerButton.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         headerButton.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: UIControl.State.normal)
         
         headerButton.addTarget(self, action: #selector(handleExpandClose), for: .touchUpInside)
@@ -161,9 +208,9 @@ class ContactTableViewController: UITableViewController {
             headerButton.setTitle(Periode.notIntroduced.rawValue, for: .normal)
         }
         if isExpanded[section] == true {
-            headerButton.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        } else {
             headerButton.backgroundColor = #colorLiteral(red: 0, green: 0.8351076245, blue: 0.7949748039, alpha: 1)
+        } else {
+            headerButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         }
         headerButton.contentHorizontalAlignment = .left
         headerButton.titleEdgeInsets = UIEdgeInsets (top: 0, left: 10, bottom: 0, right: 0)
@@ -210,8 +257,25 @@ class ContactTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToContactDetails" {
             if let destination = segue.destination as? ContactDetailTableViewController,
-                let row = tableView.indexPathForSelectedRow?.row {
-                    destination.selectedContact = contactsArray[row]
+                let row = tableView.indexPathForSelectedRow?.row,
+                let section = tableView.indexPathForSelectedRow?.section {
+                switch section {
+                case 0:
+                    destination.selectedContact = oneWeekSection[row]
+                case 1:
+                    destination.selectedContact = oneMonthSection[row]
+                case 2:
+                    destination.selectedContact = threeMonthSection[row]
+                case 3:
+                    destination.selectedContact = sixMonthSection[row]
+                case 4:
+                    destination.selectedContact = oneYearSection[row]
+                case 5:
+                    destination.selectedContact = skippedSection[row]
+                default:
+                    destination.selectedContact = notIntroducedSection[row]
+                }
+
             }
         } else if segue.identifier == "addContact" {
             // Add contact page
@@ -222,6 +286,9 @@ class ContactTableViewController: UITableViewController {
             }
         }
     }
+    
+    
+
 
 }
 
