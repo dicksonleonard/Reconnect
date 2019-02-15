@@ -10,7 +10,9 @@ import Foundation
 import UIKit
 
 enum Periode: String, CaseIterable {
+    case nextWeek = "One Week"
     case oneMonth = "One Month"
+    case threeMonth = "Three Month"
     case sixMonth = "Six Month"
     case oneYear = "One Year"
     case skipped = "Skipped"
@@ -30,7 +32,7 @@ struct Person {
     var lastContact: Date?
     var nextContact: Date?
 
-    init(name: String, lastName: String = "", jobTitle: String? = nil, image: UIImage? = nil, periode: Periode = .notIntroduced, lastContact: Date = Date(), nextContact: Date = Date(), mobileNumber:String? = "", email: String? = "", personalNotes: String? = nil) {
+    init(name: String, lastName: String = "", jobTitle: String? = nil, image: UIImage? = nil, periode: Periode = .notIntroduced, lastContact: Date? = Date(), nextContact: Date? = Date(), mobileNumber:String? = "", email: String? = "", personalNotes: String? = nil) {
         self.name = name
         self.lastName = lastName
         self.jobTitle = jobTitle
