@@ -30,7 +30,7 @@ struct Person {
     var lastContact: Date?
     var nextContact: Date?
 
-    init(name: String, lastName: String = "", jobTitle: String? = nil, image: UIImage? = nil, periode: Periode = .notIntroduced, lastContact: Date = Date(), nextContact: Date = Date(), mobileNumber:String? = "", email: String? = "", personalNotes: String? = nil) {
+    init(name: String, lastName: String = "", jobTitle: String? = nil, image: UIImage? = nil, periode: Periode = .notIntroduced, lastContact: Date? = Date(), nextContact: Date? = Date(), mobileNumber:String? = "", email: String? = "", personalNotes: String? = nil) {
         self.name = name
         self.lastName = lastName
         self.jobTitle = jobTitle
