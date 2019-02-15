@@ -13,27 +13,46 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBOutlet weak var homeTableView: UITableView!
     @IBOutlet weak var dailyContentTableHeader: UIView!
-    private var needToAddTagContactsArray: [Person] = []
-    private var needToReminderContactsArray: [Person] = []
+    private var contactListArr: [Person] = []
+    private var randomRemindedContactArr: [Person] = []
+    private var showRandomRemindedContactArr: [Person] = []
+    private var randomNotRemindedContactArr: [Person] = []
+    private var showRandomNotRemindedContactArr: [Person] = []
+
+    private var isFirstRun = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
         homeTableView.delegate = self
         homeTableView.dataSource = self
+        self.navigationController?.isNavigationBarHidden = true
         
-        // MARK: need to create connection between Person and CNContact
-        let contacts = ContactTableViewController().contacts
-        for contact in contacts {
-            needToAddTagContactsArray.append(Person(name: "\(contact.givenName) \(contact.familyName)"))
-            needToReminderContactsArray.append(Person(name: "\(contact.givenName) \(contact.familyName)"))
+        if isFirstRun {
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                appDelegate.fetchContact()
+                for contact in appDelegate.contacts {
+                    let newContact = Person(name: contact.name, jobTitle: nil, image: contact.image, periode: .notIntroduced, lastContact: nil, nextContact: nil)
+                    contactListArr.append(newContact)
+                }
+            }
+
+            let randomContact = contactListArr.shuffled()
+            randomRemindedContactArr = getRandomContact(contactList: randomContact, isReminded: true)
+            randomNotRemindedContactArr = getRandomContact(contactList: randomContact, isReminded: false)
+            isFirstRun = false
+        }
+        
+        for index in 0..<3 {
+            showRandomRemindedContactArr.append(randomRemindedContactArr[index])
+            showRandomNotRemindedContactArr.append(randomNotRemindedContactArr[index])
         }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return needToAddTagContactsArray.count
+            return showRandomRemindedContactArr.count
         } else if section == 1 {
-            return needToReminderContactsArray.count
+            return showRandomNotRemindedContactArr.count
         }
         return 1
     }
@@ -46,14 +65,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "homeContactCell", for: indexPath) as? HomeContactCell {
-            
             if indexPath.section == 0 {
-                cell.nameLabel.text = needToAddTagContactsArray[indexPath.row].name
-                cell.profileImageView.image = UIImage(named: "Perik")
+                let randomContact = self.showRandomRemindedContactArr[indexPath.row]
+                cell.nameLabel.text = randomContact.name
+                cell.profileImageView.image = randomContact.image
             } else if indexPath.section == 1 {
-                cell.nameLabel.text = needToReminderContactsArray[indexPath.row].name
-                cell.profileImageView.image = UIImage(named: "Perik")
-            }
+                let randomContact = self.showRandomRemindedContactArr[indexPath.row]
+                cell.nameLabel.text = randomContact.name
+                cell.profileImageView.image = randomContact.image            }
             return cell
         }
         return UITableViewCell()
@@ -91,19 +110,82 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     // MARK: Set the tableView section footer
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 100))
-        let showMoreButton = UIButton(frame: CGRect(x: 0, y: 0, width: tableView.frame.width * 0.9, height: footerView.frame.height * 0.6))
-        showMoreButton.center = CGPoint(x: footerView.center.x, y: 40)
-        showMoreButton.setTitle("Show More", for: UIControl.State.normal)
-        showMoreButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        showMoreButton.backgroundColor = UIColor(red: 0, green: 206, blue: 191, alpha: 1.0)
-        showMoreButton.layer.cornerRadius = 10.0
-        footerView.addSubview(showMoreButton)
-        return footerView
+        let numberOfRow = tableView.numberOfRows(inSection: section)
+        if numberOfRow < 6 {
+            let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 100))
+            let showMoreButton = UIButton(frame: CGRect(x: 0, y: 0, width: tableView.frame.width * 0.9, height: footerView.frame.height * 0.6))
+            showMoreButton.center = CGPoint(x: footerView.center.x, y: 40)
+            showMoreButton.setTitle("Show More", for: UIControl.State.normal)
+            showMoreButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+            showMoreButton.backgroundColor = #colorLiteral(red: 0, green: 0.7714591622, blue: 0.7574598193, alpha: 1)
+            showMoreButton.layer.cornerRadius = 10.0
+            showMoreButton.tag = section
+            showMoreButton.addTarget(self, action: #selector(showMore), for: .touchUpInside)
+            footerView.addSubview(showMoreButton)
+            return footerView
+        }
+        return UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     }
-    
+
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 100
+        if showRandomRemindedContactArr.count < 6 || showRandomNotRemindedContactArr.count < 6 {
+            return 100
+        }
+        return 0
+    }
+
+//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+//
+//        super.viewWillTransition(to: size, with: coordinator)
+//
+//        DispatchQueue.main.async {
+//            self.homeTableView.tableFooterView?.layoutIfNeeded()
+//            self.homeTableView.tableFooterView = self.homeTableView.tableFooterView
+//        }
+//    }
+    
+    // MARK: this function to get random reminded contact
+    func getRandomContact (contactList: [Person], isReminded: Bool) -> [Person] {
+        var randomContact: [Person] = []
+        
+        for index in 0..<contactList.count {
+            let contact = contactList[index]
+            if isReminded {
+                if contact.periode == .oneMonth {
+                    randomContact.append(contact)
+                }
+            } else {
+                if contact.periode == .notIntroduced {
+                    randomContact.append(contact)
+                }
+            }
+        }
+
+        // if no reminder at all (this for the initial case)
+        if randomContact.isEmpty {
+            for index in 0..<6 {
+                randomContact.append(contactList[index])
+            }
+        }
+        
+        return randomContact
+    }
+
+    @objc func showMore(sender: UIButton) {
+        let section = sender.tag
+        homeTableView.beginUpdates()
+        if section == 0 {
+            for index in 3..<6 {
+                showRandomRemindedContactArr.append(randomRemindedContactArr[index])
+                homeTableView.insertRows(at: [IndexPath(row: index, section: section)], with: .fade)
+            }
+        } else {
+            for index in 3..<6 {
+                showRandomNotRemindedContactArr.append(randomNotRemindedContactArr[index])
+                homeTableView.insertRows(at: [IndexPath(row: index, section: section)], with: .fade)
+            }
+        }
+        homeTableView.endUpdates()
     }
     
     /*
