@@ -31,7 +31,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
                 appDelegate.fetchContact()
                 for contact in appDelegate.contacts {
-                    let newContact = Person(name: contact.name, jobTitle: nil, image: contact.image, periode: .notIntroduced, lastContact: nil, nextContact: nil)
+                    let newContact = Person(name: contact.name, lastName: "", jobTitle: nil, image: contact.image, periode: .notIntroduced, lastContact: nil, nextContact: nil)
                     contactListArr.append(newContact)
                 }
             }

@@ -10,7 +10,9 @@ import Foundation
 import UIKit
 
 enum Periode: String, CaseIterable {
+    case nextWeek = "One Week"
     case oneMonth = "One Month"
+    case threeMonth = "Three Month"
     case sixMonth = "Six Month"
     case oneYear = "One Year"
     case skipped = "Skipped"

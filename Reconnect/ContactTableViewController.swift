@@ -15,7 +15,12 @@ class ContactTableViewController: UITableViewController {
     var contactsArray: [Person] = []
     var filteredContact: [Person] = []
     let searchController = UISearchController(searchResultsController: nil)
-    var isExpanded: [Bool] = [true, true, true, true, true, true]
+    var isExpanded: [Bool] = [true, true, true, true, true, true, true]
+    
+    var oneWeekSection:[Person] = []
+    var oneMonthSection:[Person] = []
+    
+    
     lazy var contacts: [CNContact] = {
         let contactStore = CNContactStore()
         let keysToFetch: [Any] = [
@@ -70,11 +75,20 @@ class ContactTableViewController: UITableViewController {
 
         // Transfer device contacts to app contacts
         for contact in contacts {
-            let phoneNumber = contact.phoneNumbers.first?.value.stringValue ?? "-"
-            let emailAddress = contact.emailAddresses.first?.value ?? "-"
             
-            contactsArray.append(Person(name: "\(contact.givenName) \(contact.familyName)", mobileNumber: "\(phoneNumber)", email: "\(emailAddress)", personalNotes: contact.note))
-        }
+            var person = Person(name: contact.givenName)
+            person.lastName = contact.familyName
+            person.mobileNumber = contact.phoneNumbers.first?.value.stringValue ?? "-"
+            person.email = contact.emailAddresses.first?.value as String? ?? "-"
+            person.personalNotes = contact.note
+            person.periode = Periode.allCases.randomElement() ?? Periode.notIntroduced
+            contactsArray.append(person)
+            print(person.periode)
+            //contactsArray.append(Person(name: "\(contact.givenName) \(contact.familyName)", mobileNumber: "\(phoneNumber)", email: "\(emailAddress)", personalNotes: contact.note))
+            
+
+            oneWeekSection.append(person)
+            }
         
     }
 
@@ -82,7 +96,7 @@ class ContactTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 6
+        return Periode.allCases.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -123,32 +137,38 @@ class ContactTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
     }
-    
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerButton = UIButton(type: .system)
+        let headerButton = UIButton(type: .custom)
         headerButton.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        headerButton.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: UIControl.State.normal)
+        
         headerButton.addTarget(self, action: #selector(handleExpandClose), for: .touchUpInside)
         headerButton.tag = section
         switch section {
         case 0:
-            headerButton.setTitle("Tomorrow", for: .normal)
-            return headerButton
+            headerButton.setTitle(Periode.nextWeek.rawValue, for: .normal)
         case 1:
-            headerButton.setTitle("1 month", for: .normal)
-            return headerButton
+            headerButton.setTitle(Periode.oneMonth.rawValue, for: .normal)
         case 2:
-            headerButton.setTitle("1 year", for: .normal)
-            return headerButton
+            headerButton.setTitle(Periode.threeMonth.rawValue, for: .normal)
         case 3:
-            headerButton.setTitle("2 years", for: .normal)
-            return headerButton
+            headerButton.setTitle(Periode.sixMonth.rawValue, for: .normal)
         case 4:
-            headerButton.setTitle("Skipped", for: .normal)
-            return headerButton
+            headerButton.setTitle(Periode.oneYear.rawValue, for: .normal)
+        case 5:
+            headerButton.setTitle(Periode.skipped.rawValue, for: .normal)
         default:
-            headerButton.setTitle("Not Introduced", for: .normal)
-            return headerButton
+            headerButton.setTitle(Periode.notIntroduced.rawValue, for: .normal)
         }
+        if isExpanded[section] == true {
+            headerButton.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        } else {
+            headerButton.backgroundColor = #colorLiteral(red: 0, green: 0.8351076245, blue: 0.7949748039, alpha: 1)
+        }
+        headerButton.contentHorizontalAlignment = .left
+        headerButton.titleEdgeInsets = UIEdgeInsets (top: 0, left: 10, bottom: 0, right: 0)
+        //headerButton.backgroundColor = .red
+        return headerButton
     }
     
     @objc func handleExpandClose(headerButton: UIButton) {
