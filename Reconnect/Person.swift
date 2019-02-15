@@ -20,14 +20,17 @@ enum Periode: String, CaseIterable {
 struct Person {
     var identifier: String?
     var name: String
+    var lastName: String
     var jobTitle: String?
     var image: UIImage?
     var periode: Periode
     var lastContact: Date?
     var nextContact: Date?
 
-    init(name: String, jobTitle: String? = nil, image: UIImage? = nil, periode: Periode = .notIntroduced, lastContact: Date = Date(), nextContact: Date = Date()) {
+
+    init(name: String, lastName: String = "", jobTitle: String? = nil, image: UIImage? = nil, periode: Periode = .notIntroduced, lastContact: Date = Date(), nextContact: Date = Date(), mobileNumber:String? = "", email: String? = "", personalNotes: String? = nil) {
         self.name = name
+        self.lastName = lastName
         self.jobTitle = jobTitle
         self.image = image
         self.periode = periode
