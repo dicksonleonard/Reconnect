@@ -76,8 +76,9 @@ class ContactTableViewController: UITableViewController {
         // Transfer device contacts to app contacts
         for contact in contacts {
             
-            var person = Person(name: contact.givenName)
-            person.lastName = contact.familyName
+            var person = Person(name: "")
+            person.name = "\(contact.givenName) \(contact.familyName)"
+            //person.lastName = contact.familyName
             person.mobileNumber = contact.phoneNumbers.first?.value.stringValue ?? "-"
             person.email = contact.emailAddresses.first?.value as String? ?? "-"
             person.personalNotes = contact.note
