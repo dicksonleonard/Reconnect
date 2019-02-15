@@ -28,7 +28,8 @@ class ContactDetailTableViewController: UITableViewController {
             mobileLabelOutlet.text = contact.mobileNumber
             emailLabelOutlet.text = contact.email
             messageLabelOutlet.text = contact.mobileNumber
-            notesLabelOutlet.text = contact.personalNotes
+            contactNotes()
+            //notesLabelOutlet.text = contact.personalNotes
             
             // MARK: Change the button if no data is present
             if contact.email == "-" {
@@ -79,8 +80,21 @@ class ContactDetailTableViewController: UITableViewController {
     @IBAction func messageButton(_ sender: UIButton) {
     }
     
+    // MARK: - Functions
+    
     func makeAPhoneCall() {
         
+    }
+    
+    func contactNotes() {
+        let contact = selectedContact
+        if notesLabelOutlet.text == "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." {
+            notesLabelOutlet.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+            notesLabelOutlet.text = "Type any information that remind you of this person. Profession, skills, shared history, interest, etc here..."
+        } else {
+            notesLabelOutlet.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+            notesLabelOutlet.text = contact?.personalNotes
+        }
     }
     /*
     // MARK: - Table view data source
