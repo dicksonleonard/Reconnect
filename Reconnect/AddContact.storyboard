@@ -184,9 +184,9 @@
                     <connections>
                         <outlet property="emailField" destination="0tR-Ii-dX2" id="Hri-rd-STa"/>
                         <outlet property="firstNameField" destination="BgJ-rk-CDr" id="lXy-pA-7Tr"/>
+                        <outlet property="lastNameField" destination="dgU-uA-HMA" id="rdk-l6-BUf"/>
                         <outlet property="mobileField" destination="Cer-r9-hpT" id="5Vn-Of-ucB"/>
                         <outlet property="periodPickerView" destination="cj2-Ag-oMa" id="D1P-aJ-cfF"/>
-                        <outlet property="secondNameField" destination="dgU-uA-HMA" id="j3k-7U-5CD"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fNf-ba-qIL" userLabel="First Responder" sceneMemberID="firstResponder"/>

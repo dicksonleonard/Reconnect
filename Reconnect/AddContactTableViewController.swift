@@ -11,22 +11,26 @@ import UIKit
 class AddContactTableViewController: UITableViewController, UITextFieldDelegate {
     
     @IBOutlet weak var firstNameField: UITextField!
-    @IBOutlet weak var secondNameField: UITextField!
+    @IBOutlet weak var lastNameField: UITextField!
     @IBOutlet weak var mobileField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var periodPickerView: UIPickerView!
     
+    weak var delegate: AddContactTableViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Set datasource / delegates
         periodPickerView.dataSource = self
         periodPickerView.delegate = self
         
         firstNameField.delegate = self
-        secondNameField.delegate = self
+        lastNameField.delegate = self
         mobileField.delegate = self
         emailField.delegate = self
         
+        // Tap tableview to dismiss keyboard
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tableView.addGestureRecognizer(gestureRecognizer)
     }
@@ -36,15 +40,22 @@ class AddContactTableViewController: UITableViewController, UITextFieldDelegate 
     }
     
     @IBAction func addContact(_ sender: UIBarButtonItem) {
-        print("add contact")
+        var newContact = Person(name: firstNameField.text ?? "")
+        newContact.lastName = lastNameField.text ?? ""
+        newContact.email = emailField.text
+        newContact.mobileNumber = mobileField.text
+        
+        delegate?.adddedContact(newContact)
+        
+        dismiss(animated: true, completion: nil)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         if textField == firstNameField {
             // To change the focus we manipulate the firstResponder
-            secondNameField.becomeFirstResponder()
-        } else if textField == secondNameField {
+            lastNameField.becomeFirstResponder()
+        } else if textField == lastNameField {
             mobileField.becomeFirstResponder()
         } else if textField == mobileField {
             emailField.becomeFirstResponder()
@@ -141,4 +152,8 @@ extension AddContactTableViewController: UIPickerViewDataSource, UIPickerViewDel
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return Periode.allCases[row].rawValue
     }
+}
+
+protocol AddContactTableViewControllerDelegate: class {
+    func adddedContact(_ contact: Person)
 }

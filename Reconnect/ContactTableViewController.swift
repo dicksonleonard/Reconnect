@@ -8,6 +8,7 @@
 
 import UIKit
 import Contacts
+import ContactsUI
 
 class ContactTableViewController: UITableViewController {
 
@@ -74,6 +75,7 @@ class ContactTableViewController: UITableViewController {
             
             contactsArray.append(Person(name: "\(contact.givenName) \(contact.familyName)", mobileNumber: "\(phoneNumber)", email: "\(emailAddress)", personalNotes: contact.note))
         }
+        
     }
 
     // MARK: - Table view data source
@@ -191,10 +193,14 @@ class ContactTableViewController: UITableViewController {
                 let row = tableView.indexPathForSelectedRow?.row {
                     destination.selectedContact = contactsArray[row]
             }
-            
+        } else if segue.identifier == "addContact" {
+            // Add contact page
+            if let destination = segue.destination as? UINavigationController {
+                if let targetController = destination.topViewController as? AddContactTableViewController {
+                    targetController.delegate = self
+                }
+            }
         }
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
     }
 
 }
@@ -202,5 +208,34 @@ class ContactTableViewController: UITableViewController {
 extension ContactTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         filterContentForSearchText(searchController.searchBar.text!)
+    }
+}
+
+extension ContactTableViewController: AddContactTableViewControllerDelegate {
+    func adddedContact(_ contact: Person) {
+        
+        let newContact = CNMutableContact()
+        
+        newContact.givenName = contact.name
+        newContact.familyName = contact.lastName
+        
+        if let email = contact.email {
+            let homeEmail = CNLabeledValue(label: CNLabelHome, value: email as NSString)
+            newContact.emailAddresses = [homeEmail]
+        }
+        
+        if let mobile = contact.mobileNumber {
+            let workNumber = CNLabeledValue(label: CNLabelPhoneNumberMain, value: CNPhoneNumber(stringValue: mobile))
+            newContact.phoneNumbers = [workNumber]
+        }
+        
+        let store = CNContactStore()
+        let saveRequest = CNSaveRequest()
+        saveRequest.add(newContact, toContainerWithIdentifier: nil)
+        do {
+            try store.execute(saveRequest)
+        } catch {
+            print("Add contact failed")
+        }
     }
 }

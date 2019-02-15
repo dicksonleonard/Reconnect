@@ -79,8 +79,8 @@
                     <navigationItem key="navigationItem" id="oop-Uk-X26">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="GfF-Hu-lGQ">
                             <connections>
-                                <action selector="addContact:" destination="37o-Oj-K7h" id="1Dn-I1-BSh"/>
-                                <segue destination="yqy-0f-b5B" kind="presentation" id="7BO-LS-bnN"/>
+                                <action selector="showAddContact:" destination="37o-Oj-K7h" id="Dgq-dK-i6k"/>
+                                <segue destination="yqy-0f-b5B" kind="presentation" identifier="addContact" id="qXx-hw-XaD"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
