@@ -14,6 +14,7 @@ class AddContactTableViewController: UITableViewController, UITextFieldDelegate 
     @IBOutlet weak var lastNameField: UITextField!
     @IBOutlet weak var mobileField: UITextField!
     @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var notesTextView: UITextView!
     @IBOutlet weak var periodPickerView: UIPickerView!
     
     weak var delegate: AddContactTableViewControllerDelegate?
@@ -44,6 +45,13 @@ class AddContactTableViewController: UITableViewController, UITextFieldDelegate 
         newContact.lastName = lastNameField.text ?? ""
         newContact.email = emailField.text
         newContact.mobileNumber = mobileField.text
+        newContact.personalNotes = notesTextView.text
+        
+        let pickerViewIndex = periodPickerView.selectedRow(inComponent: 0)
+        
+        if pickerViewIndex > 0 {
+            newContact.periode = Periode.allCases[pickerViewIndex-1]
+        }
         
         delegate?.adddedContact(newContact)
         
@@ -146,11 +154,15 @@ extension AddContactTableViewController: UIPickerViewDataSource, UIPickerViewDel
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return Periode.allCases.count
+        return Periode.allCases.count-1
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return Periode.allCases[row].rawValue
+        if row == 0 {
+            return ""
+        } else {
+            return Periode.allCases[row-1].rawValue
+        }
     }
 }
 

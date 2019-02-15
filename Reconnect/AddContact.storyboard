@@ -186,6 +186,7 @@
                         <outlet property="firstNameField" destination="BgJ-rk-CDr" id="lXy-pA-7Tr"/>
                         <outlet property="lastNameField" destination="dgU-uA-HMA" id="rdk-l6-BUf"/>
                         <outlet property="mobileField" destination="Cer-r9-hpT" id="5Vn-Of-ucB"/>
+                        <outlet property="notesTextView" destination="gcY-07-HgG" id="kYv-Ye-sZx"/>
                         <outlet property="periodPickerView" destination="cj2-Ag-oMa" id="D1P-aJ-cfF"/>
                     </connections>
                 </tableViewController>

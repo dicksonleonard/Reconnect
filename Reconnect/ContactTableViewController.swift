@@ -234,10 +234,15 @@ extension ContactTableViewController: UISearchResultsUpdating {
 extension ContactTableViewController: AddContactTableViewControllerDelegate {
     func adddedContact(_ contact: Person) {
         
+        // Create new phone contact to be added to device
         let newContact = CNMutableContact()
         
         newContact.givenName = contact.name
         newContact.familyName = contact.lastName
+
+        if let notes = contact.personalNotes {
+            newContact.note = notes
+        }
         
         if let email = contact.email {
             let homeEmail = CNLabeledValue(label: CNLabelHome, value: email as NSString)
