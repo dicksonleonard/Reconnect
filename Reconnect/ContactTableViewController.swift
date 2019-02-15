@@ -146,7 +146,7 @@ class ContactTableViewController: UITableViewController {
     @objc func handleExpandClose(headerButton: UIButton) {
         let section = headerButton.tag
         isExpanded[section] = !isExpanded[section]
-        tableView.reloadSections(IndexSet(section...section),with:.automatic)
+        tableView.reloadSections(IndexSet(section...section), with: .automatic)
         print(isExpanded)
 //        var indexPaths = [IndexPath]()
 //        for row in contacts.indices {

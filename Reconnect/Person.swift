@@ -26,7 +26,7 @@ struct Person {
     var lastContact: Date?
     var nextContact: Date?
 
-    init(name: String, jobTitle: String? = nil, image: UIImage? = nil, periode: Periode = .notIntroduced, lastContact: Date = Date(), nextContact: Date = Date()) {
+    init(name: String, jobTitle: String? = nil, image: UIImage? = nil, periode: Periode = .notIntroduced, lastContact: Date? = nil, nextContact: Date? = nil) {
         self.name = name
         self.jobTitle = jobTitle
         self.image = image

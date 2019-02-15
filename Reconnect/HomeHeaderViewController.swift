@@ -12,26 +12,29 @@ class HomeHeaderViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBOutlet weak var dailyContentCV: UICollectionView!
     @IBOutlet weak var quoteButton: UIButton!
     @IBOutlet weak var tipsButton: UIButton!
+    
+    var collectionViewFlowLayout: UICollectionViewFlowLayout {
+        if let collectionViewFlowLayout = dailyContentCV.collectionViewLayout as? UICollectionViewFlowLayout {
+            return collectionViewFlowLayout
+        }
+        return UICollectionViewFlowLayout()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         dailyContentCV.isPagingEnabled = true
         dailyContentCV.delegate = self
         dailyContentCV.dataSource = self
-
         // Do any additional setup after loading the view.
+        
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        dailyContentCV!.collectionViewLayout = layout
+        configureCollectionViewLayoutItemSize()
     }
     
     @IBAction func changeToQuote(_ sender: Any) {
-//        var scrollDirection = UICollectionView.ScrollPosition.right
-//        if dailyContentCV.indexPathsForVisibleItems[0].row == 0 {
-//            scrollDirection = UICollectionView.ScrollPosition.left
-//        }
-//        dailyContentCV.scrollToItem(at: IndexPath(item: 0, section: 0), at: scrollDirection, animated: true)
           dailyContentCV.scrollRectToVisible(CGRect(x: 0, y: 0, width: 10, height: 10), animated: true)
-        
-//        UIView.animate(withDuration: 3) {
-//            self.dailyContentCV.contentOffset = CGPoint(x: 0.0, y: 0.0)
-//        }
     }
     
     @IBAction func changeToTips(_ sender: Any) {
@@ -63,6 +66,7 @@ class HomeHeaderViewController: UIViewController, UICollectionViewDelegate, UICo
         }
         return UICollectionViewCell()
     }
+    
     /*
     // MARK: - Navigation
 
@@ -83,7 +87,14 @@ class HomeHeaderViewController: UIViewController, UICollectionViewDelegate, UICo
             tipsButton.setTitleColor(.black, for: UIControl.State.normal)
         }
     }
-    
-    
 
+    func configureCollectionViewLayoutItemSize() {
+        let inset: CGFloat = calculateSectionInset()
+        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
+        collectionViewFlowLayout.itemSize = CGSize(width: collectionViewFlowLayout.collectionView!.frame.size.width - inset * 2, height: collectionViewFlowLayout.collectionView!.frame.size.height * 0.9)
+    }
+    
+    func calculateSectionInset() -> CGFloat {
+        return 0
+    }
 }
