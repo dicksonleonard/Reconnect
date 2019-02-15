@@ -8,12 +8,26 @@
 
 import UIKit
 
-class ContactDetailTableViewController: UITableViewController {
+class ContactDetailTableViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return Periode.allCases.count - 2
+    }
+    
+    func pickerView(_ pickerview: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+            return Periode.allCases[row].rawValue
+    }
+    
     var selectedContact: Person?
     var remindMePickerData: [String] = []
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -52,8 +66,14 @@ class ContactDetailTableViewController: UITableViewController {
             } else {
                 messageIconOutlet.setImage(#imageLiteral(resourceName: "messageIcon"), for: .normal)
                 messageIconOutlet.isEnabled = true }
+            
+            remindPickerView.delegate = self
+            remindPickerView.dataSource = self
+            
         }
         
+
+
     }
     
     // MARK: - IB Stuffs
@@ -79,7 +99,7 @@ class ContactDetailTableViewController: UITableViewController {
     }
     @IBAction func messageButton(_ sender: UIButton) {
     }
-    
+
     // MARK: - Functions
     
     func makeAPhoneCall() {
