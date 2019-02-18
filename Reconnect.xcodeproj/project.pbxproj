@@ -14,6 +14,7 @@
 		5C45CA6B220D724E00375DA5 /* DailyQuoteCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45CA6A220D724E00375DA5 /* DailyQuoteCVCell.swift */; };
 		5C55861C22134D2E00CCA20C /* ContactDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C55861B22134D2E00CCA20C /* ContactDetailTableViewController.swift */; };
 		5C5731C42213F4BF00992AE2 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		5CF8368722183747005A2497 /* ShowMoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF8368622183747005A2497 /* ShowMoreViewController.swift */; };
 		7162FE7B220C1CE9009B1093 /* Contacts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7162FE7A220C1CE9009B1093 /* Contacts.storyboard */; };
 		7162FE7E220C1DDC009B1093 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7162FE7C220C1DDC009B1093 /* Settings.storyboard */; };
 		7162FE81220D2E9B009B1093 /* ContactTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7162FE7F220D2E9B009B1093 /* ContactTableViewController.swift */; };
@@ -59,6 +60,7 @@
 		5C45CA68220D721A00375DA5 /* DailyTipsCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTipsCVCell.swift; sourceTree = "<group>"; };
 		5C45CA6A220D724E00375DA5 /* DailyQuoteCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyQuoteCVCell.swift; sourceTree = "<group>"; };
 		5C55861B22134D2E00CCA20C /* ContactDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailTableViewController.swift; sourceTree = "<group>"; };
+		5CF8368622183747005A2497 /* ShowMoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowMoreViewController.swift; sourceTree = "<group>"; };
 		7162FE7A220C1CE9009B1093 /* Contacts.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Contacts.storyboard; sourceTree = "<group>"; };
 		7162FE7D220C1DDC009B1093 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
 		7162FE7F220D2E9B009B1093 /* ContactTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTableViewController.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 		71BFDA8D220C188300E771FF /* Reconnect */ = {
 			isa = PBXGroup;
 			children = (
+				5CF8368622183747005A2497 /* ShowMoreViewController.swift */,
 				5C55861B22134D2E00CCA20C /* ContactDetailTableViewController.swift */,
 				719A0AF52214FA690063FDA4 /* HomeHeaderViewController.swift */,
 				7162FE7F220D2E9B009B1093 /* ContactTableViewController.swift */,
@@ -349,6 +352,7 @@
 				5C45CA65220D65E800375DA5 /* HomeViewController.swift in Sources */,
 				7162FF082213D355009B1093 /* OnboardingViewController.swift in Sources */,
 				5C45CA69220D721A00375DA5 /* DailyTipsCVCell.swift in Sources */,
+				5CF8368722183747005A2497 /* ShowMoreViewController.swift in Sources */,
 				719A0AF62214FA690063FDA4 /* HomeHeaderViewController.swift in Sources */,
 				5C45CA6B220D724E00375DA5 /* DailyQuoteCVCell.swift in Sources */,
 				5C1587AF221267960087207A /* HomeContactCell.swift in Sources */,

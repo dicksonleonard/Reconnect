@@ -25,14 +25,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         homeTableView.delegate = self
         homeTableView.dataSource = self
-        self.navigationController?.isNavigationBarHidden = true
+        homeTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
         if isFirstRun {
             if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
                 appDelegate.fetchContact()
-                for contact in appDelegate.contacts {
-                    let newContact = Person(name: contact.name, lastName: "", jobTitle: nil, image: contact.image, periode: .notIntroduced, lastContact: nil, nextContact: nil)
-                    contactListArr.append(newContact)
+
+                for contact in appDelegate.contactsArray {
+                    contactListArr.append(contact)
                 }
             }
 
@@ -49,12 +49,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return showRandomRemindedContactArr.count
-        } else if section == 1 {
-            return showRandomNotRemindedContactArr.count
-        }
-        return 1
+        return 3
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -70,16 +65,20 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 cell.nameLabel.text = randomContact.name
                 cell.profileImageView.image = randomContact.image
             } else if indexPath.section == 1 {
-                let randomContact = self.showRandomRemindedContactArr[indexPath.row]
+                let randomContact = self.showRandomNotRemindedContactArr[indexPath.row]
                 cell.nameLabel.text = randomContact.name
-                cell.profileImageView.image = randomContact.image            }
+                cell.profileImageView.image = randomContact.image
+            }
             return cell
         }
         return UITableViewCell()
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     // MARK: set for tableView section header
-
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
             return "People I want to reconnect this week"
@@ -110,92 +109,112 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     // MARK: Set the tableView section footer
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let numberOfRow = tableView.numberOfRows(inSection: section)
-        if numberOfRow < 6 {
-            let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 100))
-            let showMoreButton = UIButton(frame: CGRect(x: 0, y: 0, width: tableView.frame.width * 0.9, height: footerView.frame.height * 0.6))
-            showMoreButton.center = CGPoint(x: footerView.center.x, y: 40)
-            showMoreButton.setTitle("Show More", for: UIControl.State.normal)
-            showMoreButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-            showMoreButton.backgroundColor = #colorLiteral(red: 0, green: 0.7714591622, blue: 0.7574598193, alpha: 1)
-            showMoreButton.layer.cornerRadius = 10.0
-            showMoreButton.tag = section
-            showMoreButton.addTarget(self, action: #selector(showMore), for: .touchUpInside)
-            footerView.addSubview(showMoreButton)
-            return footerView
-        }
-        return UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 100))
+        let showMoreButton = UIButton(frame: CGRect(x: 0, y: 0, width: tableView.frame.width * 0.9, height: footerView.frame.height * 0.6))
+        showMoreButton.center = CGPoint(x: footerView.center.x, y: 40)
+        showMoreButton.setTitle("Show More", for: UIControl.State.normal)
+        showMoreButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        showMoreButton.backgroundColor = #colorLiteral(red: 0, green: 0.7714591622, blue: 0.7574598193, alpha: 1)
+        showMoreButton.layer.cornerRadius = 10.0
+        showMoreButton.tag = section
+        showMoreButton.addTarget(self, action: #selector(showMore), for: .touchUpInside)
+        footerView.addSubview(showMoreButton)
+        return footerView
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if showRandomRemindedContactArr.count < 6 || showRandomNotRemindedContactArr.count < 6 {
-            return 100
-        }
-        return 0
+        return 100
     }
-
-//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-//
-//        super.viewWillTransition(to: size, with: coordinator)
-//
-//        DispatchQueue.main.async {
-//            self.homeTableView.tableFooterView?.layoutIfNeeded()
-//            self.homeTableView.tableFooterView = self.homeTableView.tableFooterView
-//        }
-//    }
     
     // MARK: this function to get random reminded contact
     func getRandomContact (contactList: [Person], isReminded: Bool) -> [Person] {
+        let randomContactList = contactList.shuffled()
         var randomContact: [Person] = []
         
-        for index in 0..<contactList.count {
-            let contact = contactList[index]
-            if isReminded {
+        if isReminded {
+            for index in 0..<contactList.count {
+                let contact = contactList[index]
                 if contact.periode == .oneMonth {
                     randomContact.append(contact)
                 }
-            } else {
-                if contact.periode == .notIntroduced {
-                    randomContact.append(contact)
+            }
+        } else {
+            for index in 0..<randomContactList.count {
+                let contact = randomContactList[index]
+                if isReminded {
+                    if contact.periode == .oneMonth {
+                        randomContact.append(contact)
+                    }
                 }
             }
         }
-
+        
         // if no reminder at all (this for the initial case)
         if randomContact.isEmpty {
-            for index in 0..<6 {
-                randomContact.append(contactList[index])
+            if isReminded {
+                for index in 0..<contactList.count {
+                    randomContact.append(contactList[index])
+                }
+            } else {
+                for index in 0..<randomContactList.count {
+                    randomContact.append(randomContactList[index])
+                }
             }
         }
         
         return randomContact
     }
 
+//    @objc func showMore(sender: UIButton) {
+//        let section = sender.tag
+//        if homeTableView.numberOfRows(inSection: section) < 6 {
+//            homeTableView.beginUpdates()
+//            if section == 0 {
+//                for index in 3..<6 {
+//                    showRandomRemindedContactArr.append(randomRemindedContactArr[index])
+//                    homeTableView.insertRows(at: [IndexPath(row: index, section: section)], with: .fade)
+//                }
+//            } else {
+//                for index in 3..<6 {
+//                    showRandomNotRemindedContactArr.append(randomNotRemindedContactArr[index])
+//                    homeTableView.insertRows(at: [IndexPath(row: index, section: section)], with: .fade)
+//                }
+//            }
+//            homeTableView.endUpdates()
+//        }
+//    }
+
     @objc func showMore(sender: UIButton) {
-        let section = sender.tag
-        homeTableView.beginUpdates()
-        if section == 0 {
-            for index in 3..<6 {
-                showRandomRemindedContactArr.append(randomRemindedContactArr[index])
-                homeTableView.insertRows(at: [IndexPath(row: index, section: section)], with: .fade)
-            }
-        } else {
-            for index in 3..<6 {
-                showRandomNotRemindedContactArr.append(randomNotRemindedContactArr[index])
-                homeTableView.insertRows(at: [IndexPath(row: index, section: section)], with: .fade)
-            }
-        }
-        homeTableView.endUpdates()
+        performSegue(withIdentifier: "showMore", sender: sender)        
     }
     
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        
+        // Make sure your segue name in storyboard is the same as this line
+        
+        if segue.identifier == "showContactDetail" {
+            if let destination = segue.destination as? ContactDetailTableViewController {
+                let indexPath = homeTableView.indexPathForSelectedRow!
+                if indexPath.section == 0 {
+                    destination.selectedContact = showRandomRemindedContactArr[indexPath.row]
+                } else if indexPath.section == 1 {
+                    destination.selectedContact = showRandomNotRemindedContactArr[indexPath.row]
+                }
+            }
+        } else if segue.identifier == "showMore" {
+            if let destination = segue.destination as? ShowMoreViewController {
+                if let button = sender as? UIButton {
+                    if button.tag == 0 {
+                        destination.contactArr = randomRemindedContactArr
+                    } else if button.tag == 1 {
+                        destination.contactArr = randomNotRemindedContactArr
+                    }
+                }
+            }
+        }
     }
-    */
 
 }

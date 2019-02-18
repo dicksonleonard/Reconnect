@@ -9,9 +9,11 @@
 import UIKit
 
 class HomeHeaderViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+    @IBOutlet weak var greetingLabel: UILabel!
     @IBOutlet weak var dailyContentCV: UICollectionView!
     @IBOutlet weak var quoteButton: UIButton!
     @IBOutlet weak var tipsButton: UIButton!
+    @IBOutlet weak var dateLabel: UILabel!
     
     var collectionViewFlowLayout: UICollectionViewFlowLayout {
         if let collectionViewFlowLayout = dailyContentCV.collectionViewLayout as? UICollectionViewFlowLayout {
@@ -20,17 +22,24 @@ class HomeHeaderViewController: UIViewController, UICollectionViewDelegate, UICo
         return UICollectionViewFlowLayout()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         dailyContentCV.isPagingEnabled = true
         dailyContentCV.delegate = self
         dailyContentCV.dataSource = self
-        // Do any additional setup after loading the view.
+        // Do any additional setup after loading the view
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         dailyContentCV!.collectionViewLayout = layout
         configureCollectionViewLayoutItemSize()
+        greetingLabel.text = "Good \(getTimeFrame())"
+        dateLabel.text = getTodayDate()
     }
     
     @IBAction func changeToQuote(_ sender: Any) {
@@ -97,4 +106,45 @@ class HomeHeaderViewController: UIViewController, UICollectionViewDelegate, UICo
     func calculateSectionInset() -> CGFloat {
         return 0
     }
+    
+    enum TimeFrame: String {
+        case morning = "Morning", afternoon = "Afternoon", night = "Night"
+    }
+    
+    func getTimeFrame() -> String {
+        let currentDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        let date24 = dateFormatter.string(from: currentDate)
+        let time : [String] = date24.components(separatedBy: ":")
+        let hour = Int(time[0])
+        
+        var fontSize = CGFloat(26.0)
+        var greeting = ""
+        
+        if let numHour = hour as Int? {
+            if numHour > 0, numHour < 11 {
+                greeting = TimeFrame.morning.rawValue
+            } else if numHour > 10, numHour < 19 {
+                fontSize = 25.5
+                greeting = TimeFrame.afternoon.rawValue
+            } else if numHour > 18 {
+                greeting = TimeFrame.afternoon.rawValue
+            }
+        }
+        greetingLabel.font = greetingLabel.font.withSize(fontSize)
+        greetingLabel.sizeToFit()
+        return greeting
+    }
+    
+    func getTodayDate() -> String {
+        let currentDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        let nowDate = dateFormatter.string(from: currentDate)
+        let dateArr : [String] = nowDate.components(separatedBy: "-")
+        let result = "\(dateArr[0])/\(dateArr[1])/\(dateArr[2])"
+        return result
+    }
+
 }
