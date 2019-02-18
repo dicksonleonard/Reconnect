@@ -392,6 +392,9 @@
                                                             <integer key="value" value="10"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="updatePressed:" destination="Rrq-8j-0Fi" eventType="touchUpInside" id="iCg-wC-q7w"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="tintColor" red="0.0" green="0.80784313725490198" blue="0.74901960784313726" alpha="1" colorSpace="calibratedRGB"/>
@@ -415,10 +418,12 @@
                         <outlet property="callIconOutlet" destination="SXi-za-ABb" id="IXg-Nc-Car"/>
                         <outlet property="emailIconOutlet" destination="hn3-69-tE6" id="Ekb-dt-quG"/>
                         <outlet property="emailLabelOutlet" destination="hLm-fQ-xs2" id="4hI-98-LmW"/>
+                        <outlet property="lastContactLabel" destination="dyj-OT-K1B" id="0GM-BJ-DML"/>
                         <outlet property="messageIconOutlet" destination="Wsf-yp-Goz" id="sty-yb-i8F"/>
                         <outlet property="messageLabelOutlet" destination="UL5-Hd-wFX" id="Y3U-R7-aKs"/>
                         <outlet property="mobileLabelOutlet" destination="a1R-zk-bt9" id="tDb-QA-nM5"/>
                         <outlet property="nameLabelOutlet" destination="bFn-XZ-kLX" id="18w-Nn-RQm"/>
+                        <outlet property="nextContactLabel" destination="NWn-YY-rdU" id="5ba-e9-L7c"/>
                         <outlet property="notesLabelOutlet" destination="be6-jL-IJu" id="AsG-KK-fnF"/>
                         <outlet property="photoUIImageView" destination="wci-LX-aYh" id="aFN-EC-6JG"/>
                         <outlet property="remindPickerView" destination="OMk-eq-RIA" id="iBr-k2-Zv3"/>

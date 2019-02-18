@@ -10,6 +10,38 @@ import UIKit
 
 class ContactDetailTableViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
+    @IBAction func updatePressed(_ sender: UIButton) {
+        // Create date format
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .none
+        
+        // Set last contact date to today
+        lastContactLabel.text = dateFormatter.string(from: Date())
+        
+        // Set next contact according to reminder period
+        let selectedRemind = Periode.allCases[remindPickerView.selectedRow(inComponent: 0)]
+        
+        var nextDate: Date
+        
+        switch selectedRemind {
+        case .nextWeek:
+            nextDate = Date(timeIntervalSinceNow: 604800)
+        case .oneMonth:
+            nextDate = Date(timeIntervalSinceNow: 2629746)
+        case .threeMonth:
+            nextDate = Date(timeIntervalSinceNow: 7889238)
+        case .sixMonth:
+            nextDate = Date(timeIntervalSinceNow: 15778476)
+        case .oneYear:
+            nextDate = Date(timeIntervalSinceNow: 31556952)
+        default:
+            nextDate = Date()
+        }
+        
+        nextContactLabel.text = dateFormatter.string(from: nextDate)
+    }
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -19,7 +51,7 @@ class ContactDetailTableViewController: UITableViewController, UIPickerViewDeleg
     }
     
     func pickerView(_ pickerview: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-            return Periode.allCases[row].rawValue
+        return Periode.allCases[row].rawValue
     }
     
     var selectedContact: Person?
@@ -86,6 +118,9 @@ class ContactDetailTableViewController: UITableViewController, UIPickerViewDeleg
     @IBOutlet weak var messageLabelOutlet: UILabel!
     @IBOutlet weak var emailLabelOutlet: UILabel!
     @IBOutlet weak var notesLabelOutlet: UITextView!
+    @IBOutlet weak var lastContactLabel: UILabel!
+    @IBOutlet weak var nextContactLabel: UILabel!
+    
     
     @IBOutlet weak var callIconOutlet: UIButton!
     @IBOutlet weak var emailIconOutlet: UIButton!
